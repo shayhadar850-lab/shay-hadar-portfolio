@@ -155,7 +155,7 @@ h2 { font-size: clamp(2rem, 3.8vw, 3.2rem); letter-spacing: -.045em; font-weight
 .cover-trace { display: flex; align-items: center; gap: 13px; font-size: clamp(.59rem, 1vw, .77rem); }
 .cover-trace span { position: relative; color: var(--tone); padding: 5px 9px; border: 1px solid var(--edge); background: #10191f; border-radius: 5px; white-space: nowrap; }
 .cover-trace span + span::before { content: ''; position: absolute; left: -14px; top: 50%; width: 13px; height: 1px; background: var(--edge); }
-.project-card .card-meta { display: flex; align-items: start; justify-content: space-between; gap: 8px; text-transform: none; letter-spacing: 0; margin-block-end: 9px; }
+.project-shell .project-card .card-meta { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 10px; text-transform: none; letter-spacing: 0; margin-block-end: 9px; }
 .project-kind { color: var(--tone); font-size: .81rem; }
 .project-status { color: #b8c4ce; font-size: .73rem; line-height: 1.4; }
 .project-card .card-title { margin: 0 0 10px; }
