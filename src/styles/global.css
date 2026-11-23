@@ -53,7 +53,6 @@ h2 { font-size: clamp(2rem, 3.8vw, 3.2rem); letter-spacing: -.045em; font-weight
 .arrow-diagonal::before { left: 8%; top: 8%; inline-size: 61%; block-size: 61%; border-start-start-radius: 1px; border-block-start: 1.4px solid currentColor; border-inline-end: 0; border-left: 1.4px solid currentColor; }
 .arrow-diagonal::after { left: 12%; top: 9%; inline-size: 106%; block-size: 1.4px; border-radius: 2px; background: currentColor; transform: rotate(45deg); transform-origin: left; }
 .arrow-out { transform: scaleX(-1); }
-.button.compact { padding: 7px 12px; min-height: 38px; font-size: .83rem; }
 .eyebrow { color: var(--highlight); font-size: .81rem; font-weight: 650; letter-spacing: .015em; text-align: start; margin-block-end: 14px; }
 .hero-band {
   position: relative;
