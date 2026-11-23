@@ -23,7 +23,7 @@ npm run preview
 
 בהתקנה ראשונה על פרויקט Astro אחר אפשר להוסיף את React ואת Tailwind באמצעות `npx astro add react tailwind`, להגדיר את כינוי הנתיב `@/*`, ולהריץ `npx shadcn@latest init`. בפרויקט הזה כבר קיימים הקבצים והנתיבים הללו. אין צורך להריץ את פקודת האתחול בעת התקנת האתר.
 
-Glass Fold מציג רקע WebGL בבאנר. בדפדפן ללא WebGL נגן וידאו מקומי מציג את אותו אפקט. ההנפשה מכבדת את העדפת הפחתת התנועה של המכשיר. הרכיב מבוסס על [GradFlow](https://gradflow.meerbahadin.dev).
+עמוד הבית משתמש במסגרת תצוגה אינטראקטיבית שמציגה צילומי ממשק מקומיים מתוך מקרי הבוחן. סגנון המסגרת והתנועה שמור ב־`src/styles/treasury.css`. האנימציה מכבדת את העדפת הפחתת התנועה של המכשיר. רכיב Glass Fold ב־`src/components/ui/` מבוסס על [GradFlow](https://gradflow.meerbahadin.dev).
 
 ## פריסה ל־Cloudflare
 

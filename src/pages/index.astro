@@ -3,7 +3,9 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SEO from '../components/SEO.astro';
 import Glyph from '../components/Glyph.astro';
-import HeroBackground from '../components/HeroBackground.astro';
+import ProjectPreview from '../components/ProjectPreview.astro';
+import portfolioScript from '../scripts/portfolio.js?url&no-inline';
+import '../styles/treasury.css';
 import ProjectCard from '../components/ProjectCard.astro';
 import Architecture from '../components/Architecture.astro';
 import Contact from '../components/Contact.astro';
@@ -22,19 +24,20 @@ const capabilities = [
 ---
 <BaseLayout>
   <SEO slot="head" title={siteConfig.title} noSuffix />
-  <section class="hero-band" aria-labelledby="hero-title">
-    <HeroBackground />
-    <div class="hero wrap">
-    <div class="hero-copy">
-      <p class="eyebrow hero-kicker"><span class="status-dot" aria-hidden="true"></span><bdi dir="ltr">Automation & Integrations</bdi></p>
-      <h1 id="hero-title">אוטומציות ואתרים<br class="hero-desktop-break" /> עם אינטגרציות<br class="hero-desktop-break" /> <em>מקצה לקצה.</em></h1>
-      <p>אני מחבר אתרי אינטרנט, מערכות CRM, ערוצי שיווק ומודלי AI לתהליכים שעובדים יחד. פיתוח ועיצוב לסוכנויות ולצוותי תוכנה, גם כקבלן משנה.</p>
+  <section class="portfolio-hero" aria-labelledby="hero-title">
+    <div class="wrap portfolio-intro">
+      <p class="portfolio-eyebrow"><bdi dir="ltr">Automation & Integrations</bdi></p>
+      <h1 id="hero-title">
+        <span class="portfolio-title-line"><span>אוטומציות ואתרים</span></span>
+        <span class="portfolio-title-line"><span>עם אינטגרציות <em>מקצה לקצה.</em></span></span>
+      </h1>
+      <p class="portfolio-lead">אני מחבר אתרי אינטרנט, מערכות CRM, ערוצי שיווק ומודלי AI לתהליכים שעובדים יחד. פיתוח ועיצוב לסוכנויות ולצוותי תוכנה, גם כקבלן משנה.</p>
       <div class="actions">
         <a class="button primary" href="#projects">צפייה בפרויקטים</a>
         <a class="button" href="#contact">יצירת קשר לשיתוף פעולה</a>
       </div>
     </div>
-    </div>
+    <ProjectPreview projects={projects} />
   </section>
   <section id="projects" class="wrap section work-section" aria-labelledby="work-title">
     <div class="section-heading">
@@ -66,8 +69,8 @@ const capabilities = [
     </div>
     <Architecture projects={projects} id="showcase" />
   </section>
-  <section id="collaboration" class="wrap section ruled" aria-labelledby="collab-title">
-    <div class="agency">
+  <section id="collaboration" class="collaboration-band" aria-labelledby="collab-title">
+    <div class="wrap section agency">
       <div>
         <p class="eyebrow" dir="ltr">White-label</p>
         <h2 id="collab-title">עבודה עם סוכנויות וצוותי תוכנה</h2>
@@ -97,4 +100,5 @@ const capabilities = [
     </div>
   </section>
   <div class="wrap bottom-section"><Contact /></div>
+  <script is:inline type="module" src={portfolioScript}></script>
 </BaseLayout>

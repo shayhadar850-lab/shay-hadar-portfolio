@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Glyph from './Glyph.astro';
+
+interface Props { projects: CollectionEntry<'projects'>[]; }
+
+const { projects } = Astro.props;
+const previews = projects
+  .map(({ id, data }) => ({ id, title: data.shortTitle, category: data.category, glyph: data.glyph, media: data.media }))
+  .filter(({ media }) => media !== undefined);
+---
+<div class="preview-stage">
+  <div class="preview-device">
+    <div class="preview-device-bar">
+      <span class="preview-device-name"><span class="preview-monogram" dir="ltr" aria-hidden="true">SH</span> תיק העבודות</span>
+      <span class="preview-device-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>
+    <div class="preview-interface" data-project-preview>
+      <div class="preview-picker" role="group" aria-label="בחירת תצוגה מקדימה">
+        {previews.map(({ id, title, glyph }, index) => (
+          <button type="button" aria-pressed={index === 0 ? 'true' : 'false'} aria-controls={'preview-' + id}>
+            <Glyph name={glyph} size={17} />
+            <bdi dir="ltr">{title}</bdi>
+          </button>
+        ))}
+      </div>
+      {previews.map(({ id, title, category, media }, index) => media && (
+        <article class="preview-project" id={'preview-' + id} hidden={index !== 0}>
+          <div class="preview-project-heading">
+            <div><h2><bdi dir="ltr">{title}</bdi></h2><p>{category}</p></div>
+            <a class="preview-project-link" href={'/projects/' + id + '/'}>למקרה הבוחן</a>
+          </div>
+          <figure class="preview-capture">
+            <img src={media.src} alt={media.alt} width={media.width} height={media.height}
+              loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} decoding="async" />
+          </figure>
+        </article>
+      ))}
+    </div>
+  </div>
+  <a class="preview-float preview-float-lilac" href="#architecture">
+    <span class="preview-float-icon"><Glyph name="nodes" size={19} /></span>
+    <span><strong>ארכיטקטורת מערכות</strong><small><bdi dir="ltr">AI · MCP · API</bdi></small></span>
+  </a>
+  <a class="preview-float preview-float-paper" href="#projects">
+    <span class="preview-float-icon"><Glyph name="layout" size={19} /></span>
+    <span><strong>{projects.length} מקרי בוחן</strong><small>מערכות ותהליכים שבניתי</small></span>
+  </a>
+</div>
