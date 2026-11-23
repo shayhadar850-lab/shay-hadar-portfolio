@@ -12,91 +12,22 @@ import { he } from '../i18n/he';
       <a href="/#capabilities">{he.capabilities}</a>
       <a href="/#collaboration">{he.collaboration}</a>
     </nav>
-    <a class="nav-contact" href="/#contact">
-      <span>{he.contact}</span>
-      <span class="nav-contact-icon" aria-hidden="true">
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
-          <path d="M15 10H5m0 0 4.5-4.5M5 10l4.5 4.5" />
-        </svg>
-      </span>
-    </a>
+    <a class="button nav-contact" href="/#contact">{he.contact}</a>
   </div>
 </header>
 
 <style>
   .nav-contact {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 9px;
-    inline-size: max-content;
-    min-block-size: 44px;
-    padding-block: 4px;
-    padding-inline: 13px 5px;
-    border: 1px solid var(--sidebar-primary);
-    border-radius: 999px;
-    background: var(--sidebar-primary);
-    box-shadow: var(--surface-shadow);
-    color: var(--sidebar-primary-foreground);
-    font-size: .85rem;
-    font-weight: 750;
-    line-height: 1.2;
+    min-inline-size: max-content;
+    padding-inline: 17px;
+    background: var(--sidebar);
+    border-color: var(--sidebar-border);
     white-space: nowrap;
-    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
-  }
-
-  .nav-contact-icon {
-    display: grid;
-    place-items: center;
-    inline-size: 32px;
-    block-size: 32px;
-    border-radius: 50%;
-    background: var(--sidebar-primary-foreground);
-    color: var(--sidebar-primary);
-    transition: background-color .2s ease;
-  }
-
-  .nav-contact-icon svg {
-    transition: transform .22s cubic-bezier(.2,.7,.3,1);
-  }
-
-  .nav-contact:is(:hover, :focus-visible) {
-    border-color: var(--sidebar-ring);
-    box-shadow: 0 4px 10px var(--shadow-ink);
-  }
-
-  .nav-contact:is(:hover, :focus-visible) .nav-contact-icon {
-    background: color-mix(in oklch, var(--sidebar-primary-foreground) 88%, var(--sidebar-primary));
   }
 
   @media (max-width: 360px) {
-    .nav-contact {
-      gap: 6px;
-      padding-inline: 9px 4px;
-      font-size: .79rem;
-    }
-
-    .nav-contact-icon {
-      inline-size: 28px;
-      block-size: 28px;
-    }
-
-    .header-shell .brand {
-      gap: 6px;
-    }
-
-    .header-shell .brand small {
-      font-size: .56rem;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .nav-contact:is(:hover, :focus-visible) .nav-contact-icon svg {
-      transform: translateX(-2px);
-    }
-
-    .nav-contact:active {
-      transform: translateY(1px);
-    }
+    .nav-contact { padding-inline: 12px; font-size: .79rem; }
+    .header-shell .brand { gap: 6px; }
+    .header-shell .brand small { font-size: .56rem; }
   }
 </style>

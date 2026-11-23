@@ -14,7 +14,6 @@ const paths = [
       <span class="canvas-label">Workflow overview</span>
       <svg class="hero-wires" viewBox="0 0 540 344" preserveAspectRatio="none">
         {paths.map((d) => <path d={d} pathLength="100" class="workflow-rail" />)}
-        {paths.map((d, index) => <path d={d} pathLength="100" class:list={['workflow-signal', 'signal-' + index]} />)}
       </svg>
       <div class="hero-node hero-node-ai"><Glyph name="spark" /><span>AI models</span></div>
       <div class="hero-node hero-node-chrome"><Glyph name="message" /><span>Social & web</span></div>

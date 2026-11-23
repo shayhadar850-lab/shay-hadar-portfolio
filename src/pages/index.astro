@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SEO from '../components/SEO.astro';
 import Glyph from '../components/Glyph.astro';
-import HeroDiagram from '../components/HeroDiagram.astro';
+import HeroBackground from '../components/HeroBackground.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Architecture from '../components/Architecture.astro';
 import Contact from '../components/Contact.astro';
@@ -23,17 +23,17 @@ const capabilities = [
 <BaseLayout>
   <SEO slot="head" title={siteConfig.title} noSuffix />
   <section class="hero-band" aria-labelledby="hero-title">
+    <HeroBackground />
     <div class="hero wrap">
     <div class="hero-copy">
       <p class="eyebrow hero-kicker"><span class="status-dot" aria-hidden="true"></span><bdi dir="ltr">Automation & Integrations</bdi></p>
       <h1 id="hero-title">אוטומציות ואתרים<br class="hero-desktop-break" /> עם אינטגרציות<br class="hero-desktop-break" /> <em>מקצה לקצה.</em></h1>
       <p>אני מחבר אתרי אינטרנט, מערכות CRM, ערוצי שיווק ומודלי AI לתהליכים שעובדים יחד. פיתוח ועיצוב לסוכנויות ולצוותי תוכנה, גם כקבלן משנה.</p>
       <div class="actions">
-        <a class="button primary" href="#projects">צפייה בפרויקטים <span aria-hidden="true">↓</span></a>
-        <a class="button" href="#contact">יצירת קשר לשיתוף פעולה <span class="arrow-diagonal" aria-hidden="true"></span></a>
+        <a class="button primary" href="#projects">צפייה בפרויקטים</a>
+        <a class="button" href="#contact">יצירת קשר לשיתוף פעולה</a>
       </div>
     </div>
-    <HeroDiagram />
     </div>
   </section>
   <section id="projects" class="wrap section work-section" aria-labelledby="work-title">

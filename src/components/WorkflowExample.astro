@@ -1,5 +1,6 @@
 ---
 import Glyph from './Glyph.astro';
+import HeroDiagram from './HeroDiagram.astro';
 
 const steps = [
   { title: 'אוספים מידע', icon: 'message', detail: 'לידים מטופס אתר, הודעות או נתוני קמפיין נכנסים ממערכות שונות.' },
@@ -10,10 +11,13 @@ const steps = [
 ] as const;
 ---
 <section id="workflow" class="wrap section workflow-example" aria-labelledby="workflow-title">
-  <div class="section-heading">
-    <p class="eyebrow">תרחיש לדוגמה</p>
-    <h2 id="workflow-title">מנתוני שיווק למשימות יומיות</h2>
-    <p>כך אפשר לחבר מערכות שונות לתהליך עבודה אחד, מהאירוע הראשון ועד לתוצר שמגיע לצוות.</p>
+  <div class="workflow-intro">
+    <div class="section-heading">
+      <p class="eyebrow">תרחיש לדוגמה</p>
+      <h2 id="workflow-title">מנתוני שיווק למשימות יומיות</h2>
+      <p>כך אפשר לחבר מערכות שונות לתהליך עבודה אחד, מהאירוע הראשון ועד לתוצר שמגיע לצוות.</p>
+    </div>
+    <HeroDiagram />
   </div>
   <ol class="workflow-steps">
     {steps.map(({ title, icon, detail }) => (

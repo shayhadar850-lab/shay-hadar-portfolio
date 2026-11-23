@@ -1,0 +1,10 @@
+<div id="glass-hero-mount"></div>
+
+<script>
+  import { createElement } from 'react';
+  import { createRoot } from 'react-dom/client';
+  import { GlassHero } from './ui/glass-hero';
+
+  const mount = document.getElementById('glass-hero-mount');
+  if (mount) createRoot(mount).render(createElement(GlassHero));
+</script>
