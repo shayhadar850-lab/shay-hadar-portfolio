@@ -33,11 +33,11 @@ import { he } from '../i18n/he';
     min-block-size: 44px;
     padding-block: 4px;
     padding-inline: 13px 5px;
-    border: 1px solid #ebdfff;
+    border: 1px solid var(--sidebar-primary);
     border-radius: 999px;
-    background: linear-gradient(155deg, #eee2ff, var(--highlight) 85%);
-    box-shadow: inset 0 1px 0 #fff8, 0 3px 12px #09061b5c;
-    color: #271a4a;
+    background: var(--sidebar-primary);
+    box-shadow: var(--surface-shadow);
+    color: var(--sidebar-primary-foreground);
     font-size: .85rem;
     font-weight: 750;
     line-height: 1.2;
@@ -51,8 +51,8 @@ import { he } from '../i18n/he';
     inline-size: 32px;
     block-size: 32px;
     border-radius: 50%;
-    background: #32235b;
-    color: #f5ebff;
+    background: var(--sidebar-primary-foreground);
+    color: var(--sidebar-primary);
     transition: background-color .2s ease;
   }
 
@@ -61,12 +61,12 @@ import { he } from '../i18n/he';
   }
 
   .nav-contact:is(:hover, :focus-visible) {
-    border-color: #fff5ff;
-    box-shadow: inset 0 1px 0 #fffc, 0 4px 17px #ab8dff59;
+    border-color: var(--sidebar-ring);
+    box-shadow: 0 4px 10px var(--shadow-ink);
   }
 
   .nav-contact:is(:hover, :focus-visible) .nav-contact-icon {
-    background: #4f3585;
+    background: color-mix(in oklch, var(--sidebar-primary-foreground) 88%, var(--sidebar-primary));
   }
 
   @media (max-width: 360px) {
