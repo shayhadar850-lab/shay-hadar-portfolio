@@ -7,29 +7,34 @@ import HeroDiagram from '../components/HeroDiagram.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Architecture from '../components/Architecture.astro';
 import Contact from '../components/Contact.astro';
+import WorkflowExample from '../components/WorkflowExample.astro';
 import { siteConfig } from '../config';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const capabilities = [
-  { title: 'AI & LLM Integration', icon: 'spark', items: ['שילוב מודלי שפה בתהליכים עסקיים באמצעות API', 'כלי MCP מותאמים והפעלה מתוך סוכני AI', 'ניהול הקשר שיחה ותיאום בין שלבי עבודה'] },
-  { title: 'Automation & Integrations', icon: 'link', items: ['REST APIs לאינטגרציות עם Notion ו־eBay', 'קליטת אירועים וסנכרון נתונים', 'בדיקות מוכנות ותהליכים עם אישור לפני ביצוע'] },
-  { title: 'Software & Infrastructure', icon: 'database', items: ['שירותי Backend ופריסה ב־Cloudflare Workers', 'Supabase לאחסון נתונים וקבצים', 'אימות, הרשאות וחיבורי OAuth'] },
-  { title: 'Browser Automation', icon: 'browser', items: ['תוספי Chrome עם Manifest V3', 'קריאה ומילוי של שדות בממשק דרך DOM', 'חיבור בין Chrome, API ומערכות CRM'] },
+  { title: 'אוטומציות ותהליכי עבודה', label: 'n8n · Make · Webhooks', icon: 'nodes', items: ['תכנון תהליך מקצה לקצה, מבחירת הטריגר ועד למסירת התוצאה', 'שימוש ב־n8n וב־Make, תזמונים יומיים, בדיקות קלט וטיפול בחריגים'] },
+  { title: 'CRM ואינטגרציות נתונים', label: 'CRM · REST APIs · Notion', icon: 'database', items: ['חיבור מערכות CRM לטפסים, לידים, קטלוגים ומערכות עסקיות', 'מיפוי שדות, סנכרון נתונים וניהול שלבי מעקב. Notion CRM מוצג בתיק העבודות'] },
+  { title: 'אוטומציות שיווק ופרסום', label: 'Social · Campaigns · Reporting', icon: 'message', items: ['חיבור ערוצי סושיאל כגון פייסבוק ואינסטגרם לכלי פרסום, CRM ומודלים חיצוניים', 'הכנת טיוטות, תורי אישור, תזמון משימות ודוחות יומיים'] },
+  { title: 'חיבור מודלים וכלי AI', label: 'LLMs · MCP · Tool Calling', icon: 'spark', items: ['שילוב מודלי שפה חיצוניים דרך API לסיווג, סיכום ויצירת תוכן', 'פיתוח כלי MCP, חיבור סוכנים למערכות חיצוניות וניהול הקשר'] },
+  { title: 'עיצוב ופיתוח אתרים', label: 'Web Design · Astro · Responsive', icon: 'layout', items: ['עיצוב ובנייה של אתרים, דפי נחיתה וממשקי עבודה מותאמים לנייד', 'חיבור האתר לכלי מדידה, לטפסים ול־CRM לפי הצורך'] },
+  { title: 'תשתיות ותוספי דפדפן', label: 'Chrome MV3 · Cloudflare · Supabase', icon: 'browser', items: ['תוספי Chrome לקריאה והזנה של מידע עסקי דרך ממשקי דפדפן', 'Backend, אחסון נתונים, פריסה בענן, אימות והרשאות'] },
 ] as const;
 ---
 <BaseLayout>
   <SEO slot="head" title={siteConfig.title} noSuffix />
-  <section class="hero wrap" aria-labelledby="hero-title">
+  <section class="hero-band" aria-labelledby="hero-title">
+    <div class="hero wrap">
     <div class="hero-copy">
       <p class="eyebrow hero-kicker"><span class="status-dot" aria-hidden="true"></span><bdi dir="ltr">Automation & Integrations</bdi></p>
-      <h1 id="hero-title">אני מחבר מערכות, אוטומציות ובינה מלאכותית <em>לפתרונות שעובדים.</em></h1>
-      <p>פיתוח מערכות עסקיות, אינטגרציות API, תשתיות AI וכלי אוטומציה עבור חברות וסוכנויות. אפשר לעבוד איתי גם כקבלן משנה מאחורי הקלעים.</p>
+      <h1 id="hero-title">אוטומציות ואתרים<br class="hero-desktop-break" /> עם אינטגרציות<br class="hero-desktop-break" /> <em>מקצה לקצה.</em></h1>
+      <p>אני מחבר אתרי אינטרנט, מערכות CRM, ערוצי שיווק ומודלי AI לתהליכים שעובדים יחד. פיתוח ועיצוב לסוכנויות ולצוותי תוכנה, גם כקבלן משנה.</p>
       <div class="actions">
         <a class="button primary" href="#projects">צפייה בפרויקטים <span aria-hidden="true">↓</span></a>
-        <a class="button" href="#contact">יצירת קשר לשיתוף פעולה <span aria-hidden="true">↖︎</span></a>
+        <a class="button" href="#contact">יצירת קשר לשיתוף פעולה <span class="arrow-diagonal" aria-hidden="true"></span></a>
       </div>
     </div>
     <HeroDiagram />
+    </div>
   </section>
   <section id="projects" class="wrap section work-section" aria-labelledby="work-title">
     <div class="section-heading">
@@ -38,15 +43,22 @@ const capabilities = [
     </div>
     <div class="project-grid">{projects.map((project) => <ProjectCard project={project} />)}</div>
   </section>
-  <section id="capabilities" class="wrap section ruled" aria-labelledby="cap-title">
-    <div class="section-heading"><h2 id="cap-title">יכולות טכנולוגיות</h2></div>
-    <div class="capability-grid">
-      {capabilities.map(({ title, icon, items }) => <article>
-        <div class="capability-title"><Glyph name={icon} /><h3 dir="ltr">{title}</h3></div>
-        <ul>{items.map((item) => <li>{item}</li>)}</ul>
-      </article>)}
+  <section id="capabilities" class="capability-band" aria-labelledby="cap-title">
+    <div class="wrap section">
+      <div class="section-heading">
+        <h2 id="cap-title">מה אפשר לבנות יחד</h2>
+        <p>משימה ממוקדת או מערכת שמחברת בין כמה צוותים וכלים.</p>
+      </div>
+      <div class="capability-grid">
+        {capabilities.map(({ title, label, icon, items }) => <article>
+          <div class="capability-title"><span class="capability-icon"><Glyph name={icon} /></span><h3>{title}</h3></div>
+          <p class="capability-label" dir="ltr">{label}</p>
+          <ul>{items.map((item) => <li>{item}</li>)}</ul>
+        </article>)}
+      </div>
     </div>
   </section>
+  <WorkflowExample />
   <section id="architecture" class="wrap section ruled" aria-labelledby="architecture-title">
     <div class="section-heading">
       <h2 id="architecture-title">ארכיטקטורה בפועל</h2>
@@ -63,7 +75,7 @@ const capabilities = [
       </div>
       <ol class="agency-steps">
         <li><strong>מגדירים משימה ראשונה</strong><p>מסכימים על התוצאה, המערכות שצריך לחבר וקריטריוני הקבלה.</p></li>
-        <li><strong>בונים ובודקים</strong><p>אני מממש, בודק את התהליך ומתעד את ההפעלה והמסירה.</p></li>
+        <li><strong>בונים ובודקים מקצה לקצה</strong><p>אני מחבר את המערכות, בודק תרחישים אמיתיים ומתעד מה מפעיל את התהליך, מה הוא מחזיר ואיך מטפלים בחריגים.</p></li>
         <li><strong>ממשיכים לפי הצורך</strong><p>משימה ראשונה יכולה להפוך לשיתוף פעולה קבוע בפרויקטים נוספים.</p></li>
       </ol>
     </div>

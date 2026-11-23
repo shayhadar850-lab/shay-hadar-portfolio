@@ -1,0 +1,27 @@
+---
+import Glyph from './Glyph.astro';
+
+const steps = [
+  { title: 'אוספים מידע', icon: 'message', detail: 'לידים מטופס אתר, הודעות או נתוני קמפיין נכנסים ממערכות שונות.' },
+  { title: 'מעבדים ומתזמנים', icon: 'nodes', detail: 'תהליך ב־n8n או ב־Make בודק את המידע, מטפל בכפילויות ומופעל לפי אירוע או לוח זמנים.' },
+  { title: 'מחברים מודל AI', icon: 'spark', detail: 'המודל מסווג פניות, מסכם פעילות או מכין טיוטת תוכן לבדיקה.' },
+  { title: 'מעדכנים CRM', icon: 'database', detail: 'רשומות מתעדכנות ומשימות מעקב נפתחות למי שאחראי עליהן.' },
+  { title: 'מוסרים תוצר', icon: 'calendar', detail: 'הצוות מקבל משימות או סיכום יומי, ותוכן לפרסום עובר אישור במידת הצורך.' },
+] as const;
+---
+<section id="workflow" class="wrap section workflow-example" aria-labelledby="workflow-title">
+  <div class="section-heading">
+    <p class="eyebrow">תרחיש לדוגמה</p>
+    <h2 id="workflow-title">מנתוני שיווק למשימות יומיות</h2>
+    <p>כך אפשר לחבר מערכות שונות לתהליך עבודה אחד, מהאירוע הראשון ועד לתוצר שמגיע לצוות.</p>
+  </div>
+  <ol class="workflow-steps">
+    {steps.map(({ title, icon, detail }) => (
+      <li>
+        <span class="workflow-icon"><Glyph name={icon} /></span>
+        <h3>{title}</h3>
+        <p>{detail}</p>
+      </li>
+    ))}
+  </ol>
+</section>

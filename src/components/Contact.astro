@@ -11,8 +11,8 @@ const email = 'mailto:' + siteConfig.email + '?subject=' + encodeURIComponent('�
     <p>שלחו לי בקצרה מה צריך לבנות, אילו מערכות מעורבות ומה חשוב לכם במסירה.</p>
   </div>
   <div class="contact-actions">
-    <a class="button primary" href={email}>שליחת אימייל <span aria-hidden="true">↖︎</span></a>
+    <a class="button primary" href={email}>שליחת אימייל <span class="arrow-diagonal" aria-hidden="true"></span></a>
     <a href={email} class="email-link" dir="ltr">{siteConfig.email}</a>
-    <a href={siteConfig.github} class="email-link" dir="ltr">GitHub ↗</a>
+    <a href={siteConfig.github} class="email-link" dir="ltr">GitHub <span class="arrow-diagonal arrow-out" aria-hidden="true"></span></a>
   </div>
 </section>

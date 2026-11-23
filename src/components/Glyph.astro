@@ -1,5 +1,5 @@
 ---
-type Name = 'terminal' | 'store' | 'message' | 'browser' | 'book' | 'nodes' | 'database' | 'spark' | 'link';
+type Name = 'terminal' | 'store' | 'message' | 'browser' | 'book' | 'nodes' | 'database' | 'spark' | 'link' | 'calendar' | 'layout';
 interface Props { name: Name; size?: number; }
 const { name, size = 21 } = Astro.props;
 const paths: Record<Name, string> = {
@@ -11,6 +11,8 @@ const paths: Record<Name, string> = {
   nodes: 'M3 4h5v5H3zM16 15h5v5h-5zM3 15h5v5H3zM16 4h5v5h-5zM8 6.5h8m-10.5 3v5m13-5v5M8 17.5h8',
   database: 'M4 6c0-2 4-3 8-3s8 1 8 3-4 3-8 3-8-1-8-3Zm0 0v6c0 2 4 3 8 3s8-1 8-3V6M4 12v6c0 2 4 3 8 3s8-1 8-3v-6',
   spark: 'm12 2 2.1 6.9L21 11l-6.9 2.1L12 20l-2.1-6.9L3 11l6.9-2.1L12 2Zm6 15v5m-2.5-2.5h5',
+  calendar: 'M4 5h16v15H4z M4 9h16M8 3v4m8-4v4M8 13h2m4 0h2m-8 3h2',
+  layout: 'M3 4h18v16H3z M3 8h18m-12 0v12m4-8h5m-5 4h4',
   link: 'm10 13 4-4m-6 6-1 1a3 3 0 0 1-4-4l5-5a3 3 0 0 1 4 0m0 10a3 3 0 0 0 4 0l5-5a3 3 0 0 0-4-4l-1 1',
 };
 ---

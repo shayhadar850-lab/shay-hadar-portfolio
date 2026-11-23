@@ -24,7 +24,7 @@ const { data } = project;
         <div><dt>סוג פרויקט</dt><dd>{data.status}</dd></div>
         <div><dt>התפקיד שלי</dt><dd>{data.role}</dd></div>
         <div><dt>טכנולוגיות</dt><dd><ul class="tags">{data.techStack.map((tag) => <li dir="ltr">{tag}</li>)}</ul></dd></div>
-        {data.repository && <div><dt>קוד מקור</dt><dd><a class="case-link" href={data.repository} dir="ltr">GitHub ↗</a></dd></div>}
+        {data.repository && <div><dt>קוד מקור</dt><dd><a class="case-link" href={data.repository} dir="ltr">GitHub <span class="arrow-diagonal arrow-out" aria-hidden="true"></span></a></dd></div>}
       </dl>
     </header>
     {data.media && <figure class="case-media">
@@ -39,7 +39,7 @@ const { data } = project;
     <div class="case-prose"><slot /></div>
     <div class="case-end">
       <a class="button" href="/#projects">{he.back} <span aria-hidden="true">←</span></a>
-      <a class="button primary" href="/#contact">שיתוף פעולה <span aria-hidden="true">↖︎</span></a>
+      <a class="button primary" href="/#contact">שיתוף פעולה <span class="arrow-diagonal" aria-hidden="true"></span></a>
     </div>
   </article>
 </BaseLayout>
