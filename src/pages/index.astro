@@ -1,0 +1,88 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/SEO.astro';
+import Glyph from '../components/Glyph.astro';
+import HeroDiagram from '../components/HeroDiagram.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Architecture from '../components/Architecture.astro';
+import Contact from '../components/Contact.astro';
+import { siteConfig } from '../config';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const capabilities = [
+  { title: 'AI & LLM Integration', icon: 'spark', items: ['שילוב מודלי שפה בתהליכים עסקיים באמצעות API', 'כלי MCP מותאמים והפעלה מתוך סוכני AI', 'ניהול הקשר שיחה ותיאום בין שלבי עבודה'] },
+  { title: 'Automation & Integrations', icon: 'link', items: ['REST APIs לאינטגרציות עם Notion ו־eBay', 'קליטת אירועים וסנכרון נתונים', 'בדיקות מוכנות ותהליכים עם אישור לפני ביצוע'] },
+  { title: 'Software & Infrastructure', icon: 'database', items: ['שירותי Backend ופריסה ב־Cloudflare Workers', 'Supabase לאחסון נתונים וקבצים', 'אימות, הרשאות וחיבורי OAuth'] },
+  { title: 'Browser Automation', icon: 'browser', items: ['תוספי Chrome עם Manifest V3', 'קריאה ומילוי של שדות בממשק דרך DOM', 'חיבור בין Chrome, API ומערכות CRM'] },
+] as const;
+---
+<BaseLayout>
+  <SEO slot="head" title={siteConfig.title} noSuffix />
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow hero-kicker"><span class="status-dot" aria-hidden="true"></span><bdi dir="ltr">Automation & Integrations</bdi></p>
+      <h1 id="hero-title">אני מחבר מערכות, אוטומציות ובינה מלאכותית <em>לפתרונות שעובדים.</em></h1>
+      <p>פיתוח מערכות עסקיות, אינטגרציות API, תשתיות AI וכלי אוטומציה עבור חברות וסוכנויות. אפשר לעבוד איתי גם כקבלן משנה מאחורי הקלעים.</p>
+      <div class="actions">
+        <a class="button primary" href="#projects">צפייה בפרויקטים <span aria-hidden="true">↓</span></a>
+        <a class="button" href="#contact">יצירת קשר לשיתוף פעולה <span aria-hidden="true">↖︎</span></a>
+      </div>
+    </div>
+    <HeroDiagram />
+  </section>
+  <section id="projects" class="wrap section work-section" aria-labelledby="work-title">
+    <div class="section-heading">
+      <h2 id="work-title">פרויקטים נבחרים</h2>
+      <p>מערכות שבניתי, הבעיות שהן פותרות והבחירות הטכניות שמאחוריהן.</p>
+    </div>
+    <div class="project-grid">{projects.map((project) => <ProjectCard project={project} />)}</div>
+  </section>
+  <section id="capabilities" class="wrap section ruled" aria-labelledby="cap-title">
+    <div class="section-heading"><h2 id="cap-title">יכולות טכנולוגיות</h2></div>
+    <div class="capability-grid">
+      {capabilities.map(({ title, icon, items }) => <article>
+        <div class="capability-title"><Glyph name={icon} /><h3 dir="ltr">{title}</h3></div>
+        <ul>{items.map((item) => <li>{item}</li>)}</ul>
+      </article>)}
+    </div>
+  </section>
+  <section id="architecture" class="wrap section ruled" aria-labelledby="architecture-title">
+    <div class="section-heading">
+      <h2 id="architecture-title">ארכיטקטורה בפועל</h2>
+      <p>בחרו מערכת כדי לראות איך מידע ופעולות עוברים בין הרכיבים שלה.</p>
+    </div>
+    <Architecture projects={projects} id="showcase" />
+  </section>
+  <section id="collaboration" class="wrap section ruled" aria-labelledby="collab-title">
+    <div class="agency">
+      <div>
+        <p class="eyebrow" dir="ltr">White-label</p>
+        <h2 id="collab-title">עבודה עם סוכנויות וצוותי תוכנה</h2>
+        <p>אתם מנהלים את הקשר עם לקוח הקצה. אני מבצע את המשימה הטכנית לפי האפיון שלכם, עם בדיקות ותיעוד למסירה. אפשר לעבוד תחת המותג שלכם.</p>
+      </div>
+      <ol class="agency-steps">
+        <li><strong>מגדירים משימה ראשונה</strong><p>מסכימים על התוצאה, המערכות שצריך לחבר וקריטריוני הקבלה.</p></li>
+        <li><strong>בונים ובודקים</strong><p>אני מממש, בודק את התהליך ומתעד את ההפעלה והמסירה.</p></li>
+        <li><strong>ממשיכים לפי הצורך</strong><p>משימה ראשונה יכולה להפוך לשיתוף פעולה קבוע בפרויקטים נוספים.</p></li>
+      </ol>
+    </div>
+  </section>
+  <section id="about" class="wrap section ruled about" aria-labelledby="about-title">
+    <h2 id="about-title">קצת עליי</h2>
+    <div>
+      <p>אני שי הדר, סטודנט להנדסת תעשייה וניהול. אני בונה מערכות וכלי תוכנה שמחברים בין תהליכים עסקיים, נתונים ושירותים חיצוניים.</p>
+      <p>בפרויקטים שלי אני מוביל את האפיון, תכנון התהליך, האינטגרציה והבדיקות. אני משתמש בסוכני קוד מבוססי AI כחלק מהמימוש, ובודק בפועל את התוצאה.</p>
+      <div class="education">
+        <h3>איך לימודי ההנדסה מתחברים לעבודה שלי</h3>
+        <ul>
+          <li><strong>תכנון וניתוח מערכות מידע</strong> — מיפוי צורכי משתמשים, זרימת נתונים וכללים עסקיים לפני שבונים.</li>
+          <li><strong>ניהול טכנולוגיה וחדשנות</strong> — בחירת פתרון לפי הצורך העסקי ויכולת ההטמעה שלו.</li>
+          <li><strong>חשבונאות והבנה פיננסית</strong> — חיבור בין עלויות, תמחור ובקרות בתהליכי מסחר.</li>
+          <li><strong>מיקרו־כלכלה ומקרו־כלכלה</strong> — הבנת תמריצים, ביקוש ותנאי השוק שבהם עסק פועל.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <div class="wrap bottom-section"><Contact /></div>
+</BaseLayout>

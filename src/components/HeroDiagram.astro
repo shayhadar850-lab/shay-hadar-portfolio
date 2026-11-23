@@ -1,0 +1,17 @@
+---
+import Glyph from './Glyph.astro';
+---
+<figure class="hero-visual" aria-label="המחשה טכנית של חיבור דפדפן, סוכן AI, APIs ומאגרי מידע">
+  <svg class="hero-wires" width="560" height="344" viewBox="0 0 560 344" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M89 104V139Q89 154 104 154H192 M471 104V139Q471 154 456 154H368 M89 249V213Q89 198 104 198H192 M471 249V213Q471 198 456 198H368" fill="none" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+    <circle cx="145" cy="154" r="3.5" fill="#82e8bd"/><circle cx="416" cy="198" r="3.5" fill="#82e8bd"/>
+  </svg>
+  <div class="hero-diagram-content" dir="ltr" aria-hidden="true">
+    <div class="hero-node hero-node-ai"><Glyph name="spark" /><span>AI Agent</span></div>
+    <div class="hero-node hero-node-chrome"><Glyph name="browser" /><span>Chrome</span></div>
+    <div class="hero-node hero-node-core"><Glyph name="nodes" size={34} /><span>Integration Layer</span><small>MCP · REST APIs</small></div>
+    <div class="hero-node hero-node-crm"><Glyph name="database" /><span>CRM & Data</span></div>
+    <div class="hero-node hero-node-events"><Glyph name="link" /><span>External APIs</span></div>
+  </div>
+  <figcaption>המחשת ארכיטקטורת אינטגרציה</figcaption>
+</figure>

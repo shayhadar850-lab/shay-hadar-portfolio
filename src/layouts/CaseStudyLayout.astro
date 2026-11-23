@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import SEO from '../components/SEO.astro';
+import Glyph from '../components/Glyph.astro';
+import Architecture from '../components/Architecture.astro';
+import { he } from '../i18n/he';
+
+interface Props { project: CollectionEntry<'projects'>; }
+const { project } = Astro.props;
+const { data } = project;
+---
+<BaseLayout>
+  <SEO slot="head" title={data.title} description={data.overview} type="article" />
+  <article class:list={['wrap', 'case-study', 'accent-' + data.accent]}>
+    <a class="case-link case-back" href="/#projects"><span aria-hidden="true">→</span> {he.back}</a>
+    <header class="case-header">
+      <div class="case-heading">
+        <p class="eyebrow"><Glyph name={data.glyph} /> {data.category}</p>
+        <h1 dir="ltr">{data.title}</h1>
+        <p class="case-lead">{data.overview}</p>
+      </div>
+      <dl class="case-meta">
+        <div><dt>סוג פרויקט</dt><dd>{data.status}</dd></div>
+        <div><dt>התפקיד שלי</dt><dd>{data.role}</dd></div>
+        <div><dt>טכנולוגיות</dt><dd><ul class="tags">{data.techStack.map((tag) => <li dir="ltr">{tag}</li>)}</ul></dd></div>
+        {data.repository && <div><dt>קוד מקור</dt><dd><a class="case-link" href={data.repository} dir="ltr">GitHub ↗</a></dd></div>}
+      </dl>
+    </header>
+    {data.media && <figure class="case-media">
+      <img src={data.media.src} width={data.media.width} height={data.media.height} alt={data.media.alt} fetchpriority="high" decoding="async" />
+      <figcaption>{data.media.caption}</figcaption>
+    </figure>}
+    <section class="case-architecture" aria-labelledby="case-architecture">
+      <h2 id="case-architecture">איך המערכת מחוברת</h2>
+      <p>המחשה טכנית המבוססת על מבנה המערכת.</p>
+      <Architecture projects={[project]} id={project.id + '-flow'} />
+    </section>
+    <div class="case-prose"><slot /></div>
+    <div class="case-end">
+      <a class="button" href="/#projects">{he.back} <span aria-hidden="true">←</span></a>
+      <a class="button primary" href="/#contact">שיתוף פעולה <span aria-hidden="true">↖︎</span></a>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import { he } from '../i18n/he';
+---
+<header class="site-header">
+  <div class="wrap header-shell">
+    <a href="/" class="brand">
+      <span class="brand-mark" dir="ltr" aria-hidden="true">SH</span>
+      <span>{he.brand}<small dir="ltr">Automation & Integrations</small></span>
+    </a>
+    <nav aria-label={he.navigation}>
+      <a href="/#projects">{he.projects}</a>
+      <a href="/#capabilities">{he.capabilities}</a>
+      <a href="/#collaboration">{he.collaboration}</a>
+    </nav>
+    <a class="button compact" href="/#contact">{he.contact} <span aria-hidden="true">↖︎</span></a>
+  </div>
+</header>

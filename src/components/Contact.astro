@@ -1,0 +1,18 @@
+---
+import { siteConfig } from '../config';
+interface Props { heading?: 'h1' | 'h2'; }
+const { heading: Heading = 'h2' } = Astro.props;
+const email = 'mailto:' + siteConfig.email + '?subject=' + encodeURIComponent('שיתוף פעולה טכנולוגי');
+---
+<section id="contact" class="contact-panel" aria-labelledby="contact-title">
+  <div>
+    <p class="eyebrow">יצירת קשר</p>
+    <Heading id="contact-title">יש לכם משימה טכנית על השולחן?</Heading>
+    <p>שלחו לי בקצרה מה צריך לבנות, אילו מערכות מעורבות ומה חשוב לכם במסירה.</p>
+  </div>
+  <div class="contact-actions">
+    <a class="button primary" href={email}>שליחת אימייל <span aria-hidden="true">↖︎</span></a>
+    <a href={email} class="email-link" dir="ltr">{siteConfig.email}</a>
+    <a href={siteConfig.github} class="email-link" dir="ltr">GitHub ↗</a>
+  </div>
+</section>

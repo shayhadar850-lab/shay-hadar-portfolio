@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import SEO from '../../components/SEO.astro';
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout>
+  <SEO slot="head" title="פרויקטים נבחרים" />
+  <section class="wrap section">
+    <h1 class="listing-heading">פרויקטים נבחרים</h1>
+    <div class="project-grid">{projects.map((project) => <ProjectCard project={project} />)}</div>
+  </section>
+</BaseLayout>

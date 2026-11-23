@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+  id: string;
+}
+const { projects, id } = Astro.props;
+---
+<div class="architecture">
+  {projects.map(({ data }, index) => (
+    <details name={id} open={index === 0} class:list={['architecture-case', 'accent-' + data.accent]}>
+      <summary><bdi dir="ltr">{data.shortTitle}</bdi><span aria-hidden="true">+</span></summary>
+      <ol class="flow" dir="ltr" aria-label={'זרימת המידע ב־' + data.shortTitle}>
+        {data.diagram.map(({ title, detail }) => (
+          <li><strong dir="ltr">{title}</strong><span dir="rtl">{detail}</span></li>
+        ))}
+      </ol>
+    </details>
+  ))}
+</div>

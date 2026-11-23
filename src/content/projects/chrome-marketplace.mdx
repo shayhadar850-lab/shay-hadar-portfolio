@@ -1,0 +1,47 @@
+---
+title: "Chrome Extension — Notion to Marketplace"
+shortTitle: Notion to Marketplace
+category: פיתוח תוספי Chrome
+status: פרויקט אישי
+order: 4
+accent: gold
+glyph: browser
+overview: "תוסף Chrome שקורא מוצרים מ־Notion וממפה אותם לשדות בממשק Facebook Marketplace."
+problem: "העברה ידנית של פרטי מוצרים בין קטלוג לטופס דפדפן יוצרת עבודה כפולה."
+role: "אפיון מיפוי שדות ובקרות, חיבור Notion לתוסף ובדיקת מסלול הכנת טיוטה."
+techStack: ["TypeScript", "React", "Chrome MV3", "Notion API", "Vitest"]
+repository: https://github.com/shayhadar850-lab/marketplace-notion-extension
+media:
+  src: /media/notion-marketplace.webp
+  alt: חלונית הצד של תוסף Chrome ובה תור טיוטות מסונכרן לדוגמה
+  caption: חלונית התוסף המקורית עם רשומות דוגמה בסביבת בדיקה מקומית.
+  width: 1140
+  height: 833
+diagram:
+  - title: Notion API
+    detail: קריאת רשומות מוצר ומיפוי הנתונים למודל משותף.
+  - title: Chrome Side Panel
+    detail: תצוגת רשומות, סינון ובדיקת שדות לפני העברה.
+  - title: Content Script
+    detail: זיהוי ההקשר ומילוי השדות בממשק היעד.
+  - title: Local State
+    detail: שמירת סטטוס הפעולה לפי מוצר וחשבון בדפדפן.
+---
+
+## הבעיה והמטרה
+
+רשומות קטלוג ב־Notion משמשות מקור מידע, בעוד שטופס Marketplace הוא ממשק העבודה בפועל. המטרה הייתה להעתיק את השדות המתאימים מתוך חלונית אחת ולסמן אילו פריטים כבר הועברו.
+
+## מה פותח
+
+- תוסף Manifest V3 עם חלונית צד ב־React, שירות רקע ו־Content Script.
+- מתאם Notion שמתרגם רשומות למודל מוצר, כולל שדות שנדרשים לסיווג, תמחור ותמונות.
+- שכבה שמזהה רכיבי טופס ב־DOM וממלאת אותם. מצב הטיוטות והפעולות נשמר מקומית, כולל התאמה לפי חשבון כדי לזהות העברה כפולה.
+
+## האתגר הטכני
+
+שדות ב־Notion ובטופס היעד בנויים אחרת. לכן מיפוי קטלוג, ערכי ברירת מחדל, ולידציה ומילוי הטופס ממומשים כשכבות נפרדות. אפשר לבדוק כל שלב בלי לבצע פעולה באתר היעד.
+
+## בדיקות ואימות
+
+התוסף נבנה בהצלחה ו־48 בדיקות Vitest עברו. הבדיקות מכסות בין היתר את המתאם ל־Notion, השדות בטיוטה ובדיקות כפילות. צילום החלונית משתמש בנתוני דוגמה ונעשה בסביבה מבודדת, בלי לפרסם מודעה.

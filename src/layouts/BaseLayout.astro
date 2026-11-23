@@ -1,0 +1,24 @@
+---
+import '@fontsource-variable/heebo';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import { he } from '../i18n/he';
+---
+<!doctype html>
+<html lang={he.lang} dir={he.dir}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0f14" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{he.skip}</a>
+    <Navigation />
+    <main id="main" tabindex="-1"><slot /></main>
+    <Footer />
+  </body>
+</html>
