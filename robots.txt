@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://shay-hadar-portfolio.shayhadar850.workers.dev/sitemap-index.xml
