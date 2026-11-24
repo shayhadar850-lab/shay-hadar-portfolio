@@ -1,0 +1,567 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BrandMark from '../BrandMark.astro';
+import Glyph from '../Glyph.astro';
+import { workflowDemos, projectShortBadge } from '../../data/portfolio';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+}
+
+const { projects } = Astro.props;
+const defaultProjectId = projects.some((p) => p.id === 'model-studio') ? 'model-studio' : projects[0]?.id ?? '';
+const defaultWorkflow = workflowDemos[0];
+
+const projectToDemoMap: Record<string, string> = {
+  'model-studio': 'model-studio',
+  'chrome-marketplace': 'model-studio',
+  'whatsapp-sales-agent': 'whatsapp-crm',
+  'gpt-desktop-agent': 'whatsapp-crm',
+  'maildesk': 'maildesk',
+  'learning-studio': 'maildesk',
+};
+
+const heroLine1 = ['מערכות,', 'אתרים'];
+const heroLine2 = [
+  { word: 'ואינטגרציות', accent: false },
+  { word: 'מקצה', accent: true },
+  { word: 'לקצה.', accent: true },
+];
+
+const serializedDemos = JSON.stringify(workflowDemos);
+---
+<section id="dashboard" class="hero-section" aria-labelledby="hero-title" data-hero-section>
+  <span class="hero-glow" data-hero-glow aria-hidden="true"></span>
+  <span class="hero-grid" aria-hidden="true"></span>
+
+  <div class="wrap hero-head">
+    <p class="hero-eyebrow hero-fade">
+      <span class="eyebrow-dot" aria-hidden="true"></span>
+      <bdi dir="ltr">Web · CRM · Automation · MCP</bdi>
+    </p>
+
+    <h1 id="hero-title" class="hero-h1">
+      <span class="hero-line">
+        {heroLine1.map((word) => (
+          <>
+            <span class="hero-mask">
+              <span class="hero-word">{word}</span>
+            </span>{' '}
+          </>
+        ))}
+      </span>
+      <span class="hero-line">
+        {heroLine2.map((item, idx) => (
+          <>
+            <span class="hero-mask">
+              <span class:list={['hero-word', { 'text-gold': item.accent }]}>{item.word}</span>
+            </span>
+            {idx < heroLine2.length - 1 ? ' ' : ''}
+          </>
+        ))}
+      </span>
+    </h1>
+
+    <p class="hero-lead hero-fade">
+      אני מחבר אתרי אינטרנט, מערכות <bdi dir="ltr">CRM</bdi>, ערוצי שיווק ומודלי <bdi dir="ltr">AI</bdi> לתהליכים בדוקים שעובדים יחד. פיתוח ועיצוב לסוכנויות ולצוותי תוכנה — גם כקבלן משנה.
+    </p>
+
+    <div class="hero-ctas hero-fade">
+      <a class="button primary" href="#projects">
+        <span>צפייה בפרויקטים</span>
+        <Glyph name="arrow-left" size={16} />
+      </a>
+      <a class="button button-lilac" href="#contact">
+        <span>יצירת קשר לשיתוף פעולה</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="device-wrap" data-device-wrap>
+    <div class="device-stage" data-device-stage>
+      <div class="device-bezel">
+        <div
+          class="dash-app"
+          data-hero-dashboard
+          data-default-project={defaultProjectId}
+          data-workflow-demos={serializedDemos}
+        >
+          <aside class="dash-side" aria-label="ניווט לוח המערכות">
+            <div class="dash-side-brand">
+              <BrandMark size={20} />
+              <span>שי הדר · <bdi dir="ltr">Workspace</bdi></span>
+            </div>
+
+            <div class="dash-side-label">מצב תצוגה</div>
+            <div class="dash-mode-list" role="tablist" aria-label="מצבי לוח הבקרה">
+              <button
+                type="button"
+                role="tab"
+                class="dash-side-item"
+                id="dash-tab-overview"
+                aria-selected="true"
+                aria-controls="dash-panel-overview"
+                data-dash-mode="overview"
+              >
+                <Glyph name="grid" size={14} />
+                <span>סקירת מערכות</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                class="dash-side-item"
+                id="dash-tab-workflow"
+                aria-selected="false"
+                aria-controls="dash-panel-workflow"
+                data-dash-mode="workflow"
+              >
+                <Glyph name="swap" size={14} />
+                <span>הדגמת תהליך</span>
+                <em class="dash-demo-tag" dir="ltr">Demo</em>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                class="dash-side-item"
+                id="dash-tab-log"
+                aria-selected="false"
+                aria-controls="dash-panel-log"
+                data-dash-mode="log"
+              >
+                <Glyph name="list" size={14} />
+                <span>יומן ובקרה</span>
+              </button>
+            </div>
+
+            <div class="dash-side-label">6 מערכות בתיק</div>
+            <div class="dash-proj-list" role="group" aria-label="בחירת מערכת להצגה">
+              {projects.map((project) => (
+                <button
+                  type="button"
+                  class:list={['dash-side-proj', 'accent-' + project.data.accent]}
+                  aria-pressed={project.id === defaultProjectId ? 'true' : 'false'}
+                  data-select-project={project.id}
+                >
+                  <i class="proj-dot" aria-hidden="true"></i>
+                  <span class="dash-proj-name"><bdi dir="ltr">{project.data.shortTitle}</bdi></span>
+                  <small dir="ltr">{projectShortBadge[project.id] ?? 'SYS'}</small>
+                </button>
+              ))}
+            </div>
+
+            <a href="#collaboration" class="dash-side-foot">
+              <Glyph name="doc" size={14} />
+              <span>עבודה כקבלן משנה</span>
+            </a>
+          </aside>
+
+          <div class="dash-main">
+            <div class="dash-crumbs">
+              <span class="dash-crumb-root">תיק עבודות</span>
+              <span aria-hidden="true">/</span>
+              <b data-dash-crumb>Model Studio</b>
+              <span class="dash-live-pill" data-dash-status-pill>
+                <i aria-hidden="true"></i>
+                <span data-dash-status-text>6 מערכות מתועדות</span>
+              </span>
+            </div>
+
+            <div class="dash-tabs-sm" role="tablist" aria-label="בחירת תצוגה במובייל">
+              <button type="button" role="tab" aria-selected="true" data-dash-mode="overview">מערכות</button>
+              <button type="button" role="tab" aria-selected="false" data-dash-mode="workflow">הדגמה</button>
+              <button type="button" role="tab" aria-selected="false" data-dash-mode="log">יומן</button>
+            </div>
+
+            <!-- VIEW 1: PROJECT OVERVIEW -->
+            <div
+              id="dash-panel-overview"
+              class="dash-view"
+              role="tabpanel"
+              aria-labelledby="dash-tab-overview"
+              data-dash-panel="overview"
+            >
+              <div class="dash-mobile-projects" role="group" aria-label="מעבר בין 6 פרויקטים">
+                {projects.map((project) => (
+                  <button
+                    type="button"
+                    class="dash-mp-chip"
+                    aria-pressed={project.id === defaultProjectId ? 'true' : 'false'}
+                    data-select-project={project.id}
+                  >
+                    <bdi dir="ltr">{project.data.shortTitle}</bdi>
+                  </button>
+                ))}
+              </div>
+
+              {projects.map((project) => {
+                const isDefault = project.id === defaultProjectId;
+                const demoId = projectToDemoMap[project.id] ?? 'model-studio';
+                const firstStage = project.data.diagram[0];
+                return (
+                  <article
+                    class:list={['dash-project-pane', 'accent-' + project.data.accent]}
+                    data-project-pane={project.id}
+                    hidden={!isDefault}
+                  >
+                    <div class="dash-proj-head">
+                      <div class="dash-proj-meta">
+                        <div class="dash-proj-kicker">
+                          <span>{project.data.category}</span>
+                          <span aria-hidden="true">·</span>
+                          <span>{project.data.status}</span>
+                        </div>
+                        <h2 class="dash-proj-title">
+                          <bdi dir="ltr">{project.data.title}</bdi>
+                        </h2>
+                        <p class="dash-proj-overview">{project.data.overview}</p>
+                      </div>
+
+                      <div class="dash-proj-actions">
+                        <a class="dash-action-primary" href={`/projects/${project.id}/`}>
+                          <span>למקרה הבוחן</span>
+                          <Glyph name="arrow-left" size={14} />
+                        </a>
+                        <button
+                          type="button"
+                          class="dash-action-ghost"
+                          data-jump-workflow={demoId}
+                        >
+                          <Glyph name="play" size={13} />
+                          <span>הדגמת זרימה</span>
+                        </button>
+                        {project.data.repository && (
+                          <a
+                            class="dash-action-icon"
+                            href={project.data.repository}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`קוד מקור ב־GitHub עבור ${project.data.shortTitle}`}
+                          >
+                            <Glyph name="github" size={15} />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+
+                    <div class="dash-evidence-box">
+                      {project.id === 'model-studio' ? (
+                        <div class="dash-media-frame" data-ms-switcher>
+                          <div class="dash-media-toolbar">
+                            <span class="dash-media-caption">צילום ממשק מקורי · נתוני דוגמה מקומיים</span>
+                            <div class="dash-seg" role="group" aria-label="מסכי Model Studio">
+                              <button type="button" aria-pressed="true" data-ms-screen="dashboard">סקירה כללית</button>
+                              <button type="button" aria-pressed="false" data-ms-screen="drafts">מסך טיוטות</button>
+                            </div>
+                          </div>
+                          <div class="dash-media-viewport">
+                            <img
+                              src="/media/model-studio-dashboard.webp"
+                              alt="מסך הסקירה של Model Studio עם ספירת מוצרים, טיוטות ומקורות ייבוא בדוגמה מקומית"
+                              width={1350}
+                              height={760}
+                              loading="eager"
+                              fetchpriority="high"
+                              decoding="async"
+                              data-ms-img="dashboard"
+                            />
+                            <img
+                              src="/media/model-studio-drafts.webp"
+                              alt="רשימת טיוטות ב־Model Studio עם עמודות מחיר, מקור, סטטוס ואפשרות עריכה"
+                              width={1350}
+                              height={760}
+                              loading="lazy"
+                              decoding="async"
+                              hidden
+                              data-ms-img="drafts"
+                            />
+                          </div>
+                        </div>
+                      ) : project.data.media ? (
+                        <div class="dash-media-frame">
+                          <div class="dash-media-toolbar">
+                            <span class="dash-media-caption">{project.data.media.caption}</span>
+                            <span class="dash-media-tag" dir="ltr">Local Capture</span>
+                          </div>
+                          <div class="dash-media-viewport">
+                            <img
+                              src={project.data.media.src}
+                              alt={project.data.media.alt}
+                              width={project.data.media.width}
+                              height={project.data.media.height}
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <div class="dash-arch-stage">
+                          <div class="dash-arch-stage-top">
+                            <span class="dash-media-caption">המחשה ארכיטקטונית מתוך קוד ותיעוד המערכת</span>
+                            <span class="dash-media-tag" dir="ltr">System Diagram</span>
+                          </div>
+                          <div class="dash-arch-visual" dir="ltr">
+                            <ol class="dash-arch-nodes">
+                              {project.data.diagram.map((node, nodeIdx) => (
+                                <li class="dash-arch-node">
+                                  <span class="dash-arch-step">{String(nodeIdx + 1).padStart(2, '0')}</span>
+                                  <strong>{node.title}</strong>
+                                  <span dir="rtl" class="dash-arch-desc">{node.detail}</span>
+                                </li>
+                              ))}
+                            </ol>
+                            {project.id === 'gpt-desktop-agent' && (
+                              <figure class="dash-bridge-badge" dir="rtl">
+                                <img
+                                  src="/media/desktop-bridge.webp"
+                                  alt="חלון תוסף Chrome של GPT Desktop Agent המציג שהחיבור למחשב פעיל"
+                                  width={300}
+                                  height={98}
+                                  loading="lazy"
+                                  decoding="async"
+                                />
+                                <figcaption>צילום מקורי של תוסף הגשר ב־Chrome במצב מחובר</figcaption>
+                              </figure>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div class="dash-pipeline-bar" data-pipeline-inspector>
+                      <div class="dash-pipeline-head">
+                        <b>זרימת רכיבים במערכת</b>
+                        <span>לחצו על שלב להסבר</span>
+                      </div>
+                      <div class="dash-stage-chips" role="group" aria-label={`שלבי זרימה ב־${project.data.shortTitle}`}>
+                        {project.data.diagram.map((node, i) => (
+                          <button
+                            type="button"
+                            class="dash-stage-chip"
+                            aria-pressed={i === 0 ? 'true' : 'false'}
+                            data-stage-btn
+                            data-stage-title={node.title}
+                            data-stage-detail={node.detail}
+                          >
+                            <span class="stage-num">{String(i + 1).padStart(2, '0')}</span>
+                            <bdi dir="ltr">{node.title}</bdi>
+                          </button>
+                        ))}
+                      </div>
+                      <div class="dash-stage-readout">
+                        <strong dir="ltr" data-readout-title>{firstStage?.title}</strong>
+                        <span data-readout-detail>{firstStage?.detail}</span>
+                      </div>
+                      <ul class="dash-stack-row" aria-label="טכנולוגיות">
+                        {project.data.techStack.map((tech) => (
+                          <li dir="ltr">{tech}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+
+            <!-- VIEW 2: WORKING WORKFLOW DEMO -->
+            <div
+              id="dash-panel-workflow"
+              class="dash-view dash-wf-view"
+              role="tabpanel"
+              aria-labelledby="dash-tab-workflow"
+              data-dash-panel="workflow"
+              hidden
+            >
+              <div class="dash-demo-notice">
+                <Glyph name="shield" size={14} />
+                <span>
+                  <strong>הדגמה אינטראקטיבית מקומית (Demo):</strong> מדמה מעבר בין כלים וטיפול בחריגים בדפדפן בלבד, ללא שליחה או קריאות API חיצוניות.
+                </span>
+              </div>
+
+              <div class="dash-wf-top">
+                <div class="dash-seg dash-wf-presets" role="group" aria-label="בחירת תרחיש הדגמה">
+                  {workflowDemos.map((demo, i) => (
+                    <button
+                      type="button"
+                      aria-pressed={i === 0 ? 'true' : 'false'}
+                      data-wf-preset={demo.id}
+                    >
+                      {demo.shortLabel}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  class="dash-edge-toggle"
+                  aria-pressed="false"
+                  data-wf-edge
+                >
+                  <span class="edge-switch" aria-hidden="true"></span>
+                  <span data-wf-edge-label>{defaultWorkflow.edgeLabel}</span>
+                </button>
+              </div>
+
+              <div class="dash-wf-controls">
+                <div class="dash-wf-btns">
+                  <button type="button" class="button primary button-sm" data-wf-run>
+                    <Glyph name="play" size={14} />
+                    <span data-wf-run-label>הרץ הדגמה</span>
+                  </button>
+                  <button type="button" class="button button-sm" data-wf-step>
+                    <Glyph name="step" size={14} />
+                    <span>צעד הבא</span>
+                  </button>
+                  <button type="button" class="button button-sm" data-wf-reset>
+                    <Glyph name="reset" size={14} />
+                    <span>איפוס</span>
+                  </button>
+                </div>
+                <span class="dash-wf-status" role="status" aria-live="polite" data-wf-status>
+                  מוכן להרצה · 0 מתוך 5 שלבים
+                </span>
+              </div>
+
+              <ol class="dash-wf-sequence" data-wf-sequence aria-label="רצף הכלים בהדגמה">
+                {defaultWorkflow.steps.map((step, i) => (
+                  <li class="wf-node" data-wf-node={i} data-state="idle">
+                    <div class="wf-node-head">
+                      <span class="wf-node-num">{String(i + 1).padStart(2, '0')}</span>
+                      <span class="wf-node-badge" data-wf-node-badge>ממתין</span>
+                    </div>
+                    <strong class="wf-node-tool" dir="ltr">{step.tool}</strong>
+                    <span class="wf-node-label">{step.label}</span>
+                  </li>
+                ))}
+              </ol>
+
+              <div class="dash-wf-log-wrap">
+                <div class="dash-wf-log-head">
+                  <b>יומן פעילות (הדגמה)</b>
+                  <span data-wf-summary>{defaultWorkflow.summary}</span>
+                </div>
+                <ul class="dash-wf-log" data-wf-log aria-live="polite">
+                  <li class="wf-log-entry" data-kind="info">
+                    <span class="wf-log-time" dir="ltr">00:00</span>
+                    <span class="wf-log-body">
+                      <b>מוכן להרצה (Demo)</b>
+                      <small>לחצו על "הרץ הדגמה" או "צעד הבא" כדי לראות את מעבר המידע והבקרות בזמן אמת.</small>
+                    </span>
+                    <span class="wf-log-pill" data-pill="demo">הדגמה</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- VIEW 3: FILTERABLE ACTIVITY LEDGER -->
+            <div
+              id="dash-panel-log"
+              class="dash-view dash-log-view"
+              role="tabpanel"
+              aria-labelledby="dash-tab-log"
+              data-dash-panel="log"
+              hidden
+            >
+              <div class="dash-log-head">
+                <div>
+                  <h3 class="dash-log-title">יומן פעילות ובקרות (הדגמה)</h3>
+                  <p class="dash-log-sub">כל ריצה מהלשונית "הדגמת תהליך" מתעדכנת כאן בראש הרשימה.</p>
+                </div>
+                <div class="dash-seg" role="tablist" aria-label="סינון יומן הדגמה">
+                  <button type="button" role="tab" aria-selected="true" data-log-filter="all">הכל</button>
+                  <button type="button" role="tab" aria-selected="false" data-log-filter="done">הושלם</button>
+                  <button type="button" role="tab" aria-selected="false" data-log-filter="guard">בקרה</button>
+                </div>
+              </div>
+
+              <ul class="dash-ledger" data-dash-ledger aria-live="polite">
+                <li data-log-kind="done">
+                  <span class="led-time" dir="ltr">דוגמה</span>
+                  <span class="led-text">
+                    <b>Model Studio → Read-back Guard</b>
+                    <small>אימות מצב מול eBay API הושלם ללא כפילות (אירוע לדוגמה)</small>
+                  </span>
+                  <span class="led-pill" data-s="done">הושלם</span>
+                </li>
+                <li data-log-kind="guard">
+                  <span class="led-time" dir="ltr">דוגמה</span>
+                  <span class="led-text">
+                    <b>MailDesk → Reply Guard</b>
+                    <small>זוהתה תשובה בתיבה — הודעת ההמשך נעצרה ביומן SQLite (אירוע לדוגמה)</small>
+                  </span>
+                  <span class="led-pill" data-s="guard">בקרת בטיחות</span>
+                </li>
+                <li data-log-kind="done">
+                  <span class="led-time" dir="ltr">דוגמה</span>
+                  <span class="led-text">
+                    <b>GPT Desktop Agent → MCP Bridge</b>
+                    <small>קריאת מצב מופרדת מביצוע הפעולה עבור לשונית Chrome מאומתת (אירוע לדוגמה)</small>
+                  </span>
+                  <span class="led-pill" data-s="done">הושלם</span>
+                </li>
+              </ul>
+
+              <div class="dash-log-foot">
+                <span class="dash-log-note">נתוני ההמחשה נוצרים מקומית בדפדפן בלבד.</span>
+                <button type="button" class="dash-inline-link" data-dash-mode="workflow">
+                  להרצת הדגמה חדשה ←
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating cards modeled on reference FlowCards -->
+    <div class="hero-floats">
+      <div class="hero-float hero-float-1" data-float-card="0">
+        <button type="button" class="flow-card" data-float-open-demo aria-label="פתיחת הדגמת התהליך בלוח המערכות">
+          <div class="flow-card-top">
+            <span data-float-kicker>הדגמת תהליך</span>
+            <b data-float-title>Model Studio</b>
+            <em data-float-badge>Demo</em>
+          </div>
+          <div class="flow-card-row" dir="ltr">
+            <span class="flow-chip">
+              <i aria-hidden="true"></i>
+              <span data-float-from>{defaultWorkflow.fromChip}</span>
+            </span>
+            <svg class="flow-arrow" width="38" height="10" viewBox="0 0 38 10" aria-hidden="true">
+              <path d="M1 5h32" />
+              <path d="M29 1l4 4-4 4" />
+            </svg>
+            <span class="flow-chip flow-chip-b">
+              <i aria-hidden="true"></i>
+              <span data-float-to>{defaultWorkflow.toChip}</span>
+            </span>
+          </div>
+        </button>
+      </div>
+
+      <div class="hero-float hero-float-2" data-float-card="1">
+        <a href="#projects" class="flow-card flow-card-secondary">
+          <div class="flow-card-top">
+            <span>תיק עבודות מאומת</span>
+            <b>6 מקרי בוחן</b>
+            <em>לצפייה</em>
+          </div>
+          <div class="flow-card-row" dir="ltr">
+            <span class="flow-chip">
+              <i aria-hidden="true"></i>
+              <span>Web · CRM</span>
+            </span>
+            <svg class="flow-arrow" width="38" height="10" viewBox="0 0 38 10" aria-hidden="true">
+              <path d="M1 5h32" />
+              <path d="M29 1l4 4-4 4" />
+            </svg>
+            <span class="flow-chip flow-chip-b">
+              <i aria-hidden="true"></i>
+              <span>AI · MCP</span>
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,19 +1,79 @@
 ---
 import { siteConfig } from '../config';
+import { contactTopics } from '../data/portfolio';
 import Glyph from './Glyph.astro';
-interface Props { heading?: 'h1' | 'h2'; }
+
+interface Props {
+  heading?: 'h1' | 'h2';
+}
+
 const { heading: Heading = 'h2' } = Astro.props;
-const email = 'mailto:' + siteConfig.email + '?subject=' + encodeURIComponent('שיתוף פעולה טכנולוגי');
+const defaultTopic = contactTopics[0];
+const initialMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(defaultTopic.subject)}`;
 ---
-<section id="contact" class="contact-panel" aria-labelledby="contact-title">
-  <div>
-    <p class="eyebrow">יצירת קשר</p>
-    <Heading id="contact-title">יש לכם משימה טכנית על השולחן?</Heading>
-    <p>שלחו לי בקצרה מה צריך לבנות, אילו מערכות מעורבות ומה חשוב לכם במסירה.</p>
-  </div>
-  <div class="contact-actions">
-    <a class="button primary contact-mail" href={email}><Glyph name="mail" size={18} /> שליחת אימייל</a>
-    <a href={email} class="email-link" dir="ltr">{siteConfig.email}</a>
-    <a href={siteConfig.github} class="email-link" dir="ltr">GitHub</a>
+<section id="contact" class="cta-section" aria-labelledby="contact-title">
+  <div class="cta-surface" data-cta-surface data-email={siteConfig.email}>
+    <span class="cta-blob cta-blob-a" aria-hidden="true"></span>
+    <span class="cta-blob cta-blob-b" aria-hidden="true"></span>
+    <span class="cta-blob cta-blob-c" aria-hidden="true"></span>
+    <span class="cta-grain" aria-hidden="true"></span>
+
+    <div class="cta-inner">
+      <div class="cta-copy">
+        <p class="section-pill">יצירת קשר לשיתוף פעולה</p>
+        <Heading id="contact-title" class="cta-title">
+          יש לכם משימה טכנית <em>על השולחן?</em>
+        </Heading>
+        <p class="cta-lead">
+          שלחו לי בקצרה מה צריך לבנות, אילו מערכות מעורבות ומה חשוב לכם במסירה. אפשר להתחיל ממשימה אחת ממוקדת או משיתוף פעולה שוטף כקבלן משנה.
+        </p>
+
+        <div class="cta-topics" role="group" aria-label="בחירת נושא לפנייה במייל">
+          <span class="cta-topics-label">נושא מהיר למייל:</span>
+          <div class="cta-topic-list">
+            {contactTopics.map((topic, index) => (
+              <button
+                type="button"
+                class="cta-topic-chip"
+                aria-pressed={index === 0 ? 'true' : 'false'}
+                data-topic-subject={topic.subject}
+              >
+                {topic.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div class="cta-actions">
+          <a class="button primary cta-mail-btn" href={initialMailto} data-mailto-link>
+            <Glyph name="mail" size={17} />
+            <span>שליחת אימייל לשי</span>
+            <Glyph name="arrow-left" size={15} />
+          </a>
+
+          <button type="button" class="button button-glass" data-copy-email>
+            <Glyph name="copy" size={16} />
+            <span data-copy-label>העתקת כתובת האימייל</span>
+          </button>
+
+          <a
+            href={siteConfig.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button button-glass"
+          >
+            <Glyph name="github" size={16} />
+            <span dir="ltr">GitHub</span>
+          </a>
+        </div>
+
+        <div class="cta-meta-row">
+          <a href={initialMailto} class="email-link" dir="ltr" data-mailto-secondary>
+            {siteConfig.email}
+          </a>
+          <span class="cta-copy-status" role="status" aria-live="polite" data-copy-status></span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

@@ -1,0 +1,150 @@
+---
+import { siteConfig } from '../../config';
+import Glyph from '../Glyph.astro';
+
+const monitoringSubject = 'ניטור, פיקוח ותפעול מערכות';
+const monitoringMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(monitoringSubject)}`;
+const systemsMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent('פנייה בנושא פיתוח מערכות ואוטומציות')}`;
+const webMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent('פנייה בנושא בניית אתרים ודפי נחיתה')}`;
+
+const monitoringScope = [
+  'ניטור זמינות מערכות ותהליכים ובדיקת התרעות ותקלות לפי נוהל.',
+  'בדיקות יזומות של כשלי אוטומציה, סנכרון נתונים, זרימת הזמנות וטפסים.',
+  'טיפול ראשוני בחריגים, תיעוד, פתיחת קריאה והסלמה לגורם האחראי לפי הנוהל.',
+  'בדיקות תקינות תקופתיות, מעקב דוחות ובקרת איכות תפעולית.',
+] as const;
+
+const monitoringParams = [
+  'מערכות ותהליכים מכוסים',
+  'שעות פעילות מוסכמות',
+  'זמני תגובה וטיפול ראשוני',
+  'הרשאות גישה ונוהל הסלמה',
+] as const;
+---
+<section id="services" class="page-sec services-sec" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="services-head">
+      <div class="sec-label">מסלולי שירות נפרדים</div>
+      <h2 id="services-title" class="sec-h2" data-rise>
+        שלושה ערוצי שירות עצמאיים — <em>כל אחד בנפרד, לפי הצורך</em>
+      </h2>
+      <p class="sec-sub" data-rise>
+        אפשר לפנות לכל מסלול באופן עצמאי ללא צורך בחבילה משולבת: פיתוח מערכות ואוטומציות, בניית אתרים ודפי נחיתה, או ניטור, פיקוח ותפעול שוטף מאחורי הקלעים.
+      </p>
+    </div>
+
+    <div class="services-layout">
+      <!-- Standalone Service 1 & 2: Two distinct side-by-side cards -->
+      <div class="services-pair">
+        <article id="services-systems" class="service-card" data-rise>
+          <div class="service-card-top">
+            <span class="service-ic"><Glyph name="nodes" size={20} /></span>
+            <span class="service-badge">מסלול עצמאי · פיתוח ואינטגרציה</span>
+          </div>
+          <h3>פיתוח מערכות, אינטגרציות ואוטומציות</h3>
+          <p class="service-desc">
+            תכנון ובנייה של אוטומציות עסקיות, חיבורי <bdi dir="ltr">CRM</bdi> ו־<bdi dir="ltr">REST APIs</bdi>, תוספי <bdi dir="ltr">Chrome MV3</bdi> ושילוב כלי <bdi dir="ltr">AI</bdi> ו־<bdi dir="ltr">MCP</bdi> — מאפיון זרימת הנתונים ועד בדיקות ותיעוד מסירה.
+          </p>
+          <ul class="service-points">
+            <li><Glyph name="check" size={14} stroke={2.2} /><span>תהליכי <bdi dir="ltr">n8n</bdi>, <bdi dir="ltr">Make</bdi>, Webhooks וסנכרון בין מערכות</span></li>
+            <li><Glyph name="check" size={14} stroke={2.2} /><span>בקרות קלט, מניעת כפילויות וטיפול מתועד בחריגים</span></li>
+            <li><Glyph name="check" size={14} stroke={2.2} /><span>עבודה ישירה מול הצוות או כקבלן משנה (<bdi dir="ltr">White-label</bdi>)</span></li>
+          </ul>
+          <div class="service-foot">
+            <a class="button button-sm" href={systemsMailto}>
+              <Glyph name="mail" size={14} />
+              <span>פנייה לפיתוח ואוטומציה</span>
+            </a>
+            <a class="service-ref-link" href="#projects">
+              <span>למקרי הבוחן</span>
+              <Glyph name="arrow-left" size={14} />
+            </a>
+          </div>
+        </article>
+
+        <article id="services-web" class="service-card" data-rise>
+          <div class="service-card-top">
+            <span class="service-ic"><Glyph name="layout" size={20} /></span>
+            <span class="service-badge">מסלול עצמאי · Web &amp; UI</span>
+          </div>
+          <h3>בניית אתרים ודפי נחיתה</h3>
+          <p class="service-desc">
+            עיצוב ופיתוח אתרים, דפי נחיתה וממשקי עבודה מהירים בעברית (<bdi dir="ltr">RTL</bdi>) ומותאמים לנייד — עם חיבור לכלי מדידה, לטפסים ולמערכת ה־<bdi dir="ltr">CRM</bdi> לפי הצורך.
+          </p>
+          <ul class="service-points">
+            <li><Glyph name="check" size={14} stroke={2.2} /><span>אתרים נקיים, מהירים ונגישים מבוססי <bdi dir="ltr">Astro</bdi> ו־Web מודרני</span></li>
+            <li><Glyph name="check" size={14} stroke={2.2} /><span>דגש על היררכיה ברורה, רספונסיביות וטיפוגרפיה עברית מדויקת</span></li>
+            <li><Glyph name="check" size={14} stroke={2.2} /><span>חיבור טפסים, מדידה ואינטגרציות אתר ללא תלות בחבילה רחבה</span></li>
+          </ul>
+          <div class="service-foot">
+            <a class="button button-sm" href={webMailto}>
+              <Glyph name="mail" size={14} />
+              <span>פנייה לבניית אתר</span>
+            </a>
+            <a class="service-ref-link" href="#capabilities">
+              <span>ליכולות הפיתוח</span>
+              <Glyph name="arrow-left" size={14} />
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Standalone Service 3: Dedicated Monitoring, Supervision & Operations -->
+      <article id="services-monitoring" class="service-card service-monitoring" data-rise>
+        <div class="monitoring-grid">
+          <div class="monitoring-main">
+            <div class="service-card-top">
+              <span class="service-ic service-ic-gold"><Glyph name="shield" size={20} /></span>
+              <span class="service-badge service-badge-gold">מסלול שירות עצמאי · קבלנות משנה מאחורי הקלעים</span>
+            </div>
+
+            <h3>ניטור, פיקוח ותפעול מערכות</h3>
+
+            <p class="service-desc monitoring-audience">
+              מיועד לחברות <bdi dir="ltr">IT</bdi> ושירותים מנוהלים, חברות תוכנה ו־<bdi dir="ltr">SaaS</bdi>, אינטגרטורים וחברות שמפעילות מערכות עבור לקוחותיהן. החברה מנהלת את הקשר מול לקוחותיה; אני מבצע את עבודת הניטור והבקרה מאחורי הקלעים בהיקף מוסכם.
+            </p>
+
+            <ul class="monitoring-list">
+              {monitoringScope.map((point) => (
+                <li>
+                  <span class="monitoring-check" aria-hidden="true">
+                    <Glyph name="check" size={14} stroke={2.3} />
+                  </span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <aside class="monitoring-side" aria-label="מסגרת פיילוט ושקיפות השירות">
+            <div class="monitoring-pilot-box">
+              <span class="monitoring-kicker">בדיקת התאמה או פיילוט מוגדר</span>
+              <p>
+                מסלול פתוח לבחינת התאמה הדדית או לפיילוט תחום מראש. לפני שמתחילים מגדירים במשותף:
+              </p>
+              <ul class="monitoring-params">
+                {monitoringParams.map((param) => (
+                  <li>{param}</li>
+                ))}
+              </ul>
+              <p class="monitoring-boundary">
+                <strong>גבולות היקף בשקיפות מלאה:</strong> הפעילות מתבצעת בשעות ובהיקף שמוסכמים מראש בלבד — השירות אינו מוקד <bdi dir="ltr">24/7</bdi> ואינו מיועד לפיקוח בטיחותי או לכיסוי מערכות קריטיות.
+              </p>
+            </div>
+
+            <div class="monitoring-cta-wrap">
+              <a class="button primary monitoring-cta" href={monitoringMailto} data-monitoring-mailto>
+                <Glyph name="mail" size={16} />
+                <span>פנייה בנושא ניטור, פיקוח ותפעול מערכות</span>
+                <Glyph name="arrow-left" size={15} />
+              </a>
+              <span class="monitoring-cta-hint">
+                נושא דוא״ל מוכן מראש: <strong>{monitoringSubject}</strong>
+              </span>
+            </div>
+          </aside>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

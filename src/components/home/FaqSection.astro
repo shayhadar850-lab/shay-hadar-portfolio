@@ -1,0 +1,52 @@
+---
+import { siteConfig } from '../../config';
+import { faqs } from '../../data/portfolio';
+import Glyph from '../Glyph.astro';
+
+const mailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent('שאלה בנושא שיתוף פעולה')}`;
+---
+<section id="faq" class="page-sec faq-sec" aria-labelledby="faq-title" data-faq-group>
+  <div class="wrap split-layout">
+    <div class="sec-label">שאלות נפוצות</div>
+
+    <div>
+      <h2 id="faq-title" class="sec-h2 faq-title" data-rise>
+        שאלות טכניות <em>ושיתוף פעולה</em>
+      </h2>
+
+      <ul class="faq-list">
+        {faqs.map((item, idx) => (
+          <li data-rise>
+            <button
+              type="button"
+              class="faq-trigger"
+              aria-expanded={idx === 0 ? 'true' : 'false'}
+              aria-controls={`faq-panel-${idx}`}
+              data-faq-btn={idx}
+            >
+              <span>{item.q}</span>
+              <span class="plus-icon" data-open={idx === 0 ? 'true' : undefined}>
+                <Glyph name="plus" size={16} />
+              </span>
+            </button>
+            <div
+              id={`faq-panel-${idx}`}
+              class="collapse-grid"
+              data-faq-panel={idx}
+              data-open={idx === 0 ? 'true' : undefined}
+            >
+              <div>
+                <p>{item.a}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <p class="faq-more">
+        יש לכם שאלה נוספת על משימה או אינטגרציה מסוימת? כתבו ישירות ל־
+        <a href={mailHref} dir="ltr">{siteConfig.email}</a>
+      </p>
+    </div>
+  </div>
+</section>

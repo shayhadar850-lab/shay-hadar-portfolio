@@ -1,0 +1,74 @@
+---
+interface StatementWord {
+  word: string;
+  gold?: boolean;
+}
+
+const statementWords: StatementWord[] = [
+  { word: 'אינטגרציות' },
+  { word: 'לא' },
+  { word: 'צריכות' },
+  { word: 'להיות' },
+  { word: 'טלאי' },
+  { word: 'שביר' },
+  { word: 'בין' },
+  { word: 'כלים.' },
+  { word: 'אני' },
+  { word: 'בונה' },
+  { word: 'מערכות', gold: true },
+  { word: 'מחוברות', gold: true },
+  { word: '—' },
+  { word: 'מאפיון' },
+  { word: 'זרימת' },
+  { word: 'הנתונים' },
+  { word: 'ועד' },
+  { word: 'חיבור' },
+  { word: 'ה־API,', gold: false },
+  { word: 'בקרות' },
+  { word: 'החריגים' },
+  { word: 'והבדיקות' },
+  { word: 'בפועל.' },
+];
+
+const pillars = [
+  {
+    figure: '6',
+    label: 'מערכות ותהליכים מתועדים בתיק העבודות — מאפיון ועד קוד ובדיקות.',
+  },
+  {
+    figure: 'E2E',
+    label: 'אחריות טכנית מלאה: אתר, Backend, אינטגרציות API, תוספי דפדפן וכלי AI.',
+  },
+  {
+    figure: '1:1',
+    label: 'עבודה ישירה מול סוכנויות וצוותי תוכנה — גם כקבלן משנה (White-label).',
+  },
+] as const;
+---
+<section id="approach" class="page-sec statement-sec" aria-labelledby="statement-label">
+  <div class="wrap split-layout">
+    <div id="statement-label" class="sec-label">הגישה</div>
+    <div class="statement-body">
+      <p class="statement-text" data-ink-statement>
+        {statementWords.map((item, idx) => (
+          <>
+            <span class:list={['ink-word', { 'text-gold': item.gold }]} data-ink-word>
+              {item.word}
+            </span>
+            {idx < statementWords.length - 1 ? ' ' : ''}
+          </>
+        ))}
+      </p>
+
+      <div class="stat-tiles" data-stat-tiles>
+        {pillars.map((item) => (
+          <div class="stat-tile" data-rise>
+            <span class="stat-rule" data-stat-rule aria-hidden="true"></span>
+            <b dir="ltr">{item.figure}</b>
+            <p>{item.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

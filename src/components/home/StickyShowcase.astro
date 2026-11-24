@@ -1,0 +1,119 @@
+---
+import Glyph from '../Glyph.astro';
+import ShowcaseSceneContent from './ShowcaseSceneContent.astro';
+
+const scenes = [
+  {
+    id: 0 as const,
+    num: '01',
+    kicker: 'Model Studio · Notion to Marketplace',
+    title: 'קטלוגים, טיוטות וזירות מסחר',
+    text: 'איחוד מידע על מוצרים, תמונות ודרישות קטגוריה לתהליך עבודה מבוקר: מקליטה בדפדפן דרך תוסף Chrome MV3 וניהול טיוטות ב־Supabase ועד הכנת הצעה ואימות Read-back מול eBay API.',
+    linkHref: '/projects/model-studio/',
+    linkLabel: 'למקרה הבוחן של Model Studio',
+    hint: 'לחצו על השורות לבדיקת שער האיכות או עברו לצילום המסך המקורי.',
+  },
+  {
+    id: 1 as const,
+    num: '02',
+    kicker: 'GPT Desktop Agent · WhatsApp Sales Agent',
+    title: 'סוכני AI, כלי MCP וניתוב הקשר',
+    text: 'חיבור מודלי שפה לכלים חיצוניים בצורה מבוקרת: שרת MCP שפועל מול Windows ו־Chrome דרך חיבור מאומת, וסוכן WhatsApp שמושך קטלוג ומתעד שיחות ב־Notion CRM עם כללי בטיחות.',
+    linkHref: '/projects/gpt-desktop-agent/',
+    linkLabel: 'למקרה הבוחן של GPT Desktop Agent',
+    hint: 'פתחו את מגירת התרחישים בתוך המסגרת כדי להחליף בין מסלולי הניתוב.',
+  },
+  {
+    id: 2 as const,
+    num: '03',
+    kicker: 'MailDesk · CRM & Multi-Inbox',
+    title: 'קמפיינים, תזמון ובקרת תשובות',
+    text: 'ניהול רצפי דיוור במספר חשבונות Gmail עם ייבוא CSV, חלונות פעילות לפי אזור זמן ויומן SQLite מתמשך שמונע כפילויות ועוצר הודעות המשך אוטומטית ברגע שמגיעה תשובה או בקשת הסרה.',
+    linkHref: '/projects/maildesk/',
+    linkLabel: 'למקרה הבוחן של MailDesk',
+    hint: 'נסו לשנות את מצב הנמען בהדגמה או הציצו בלוח הבקרה המקורי.',
+  },
+] as const;
+---
+<section id="showcase" class="page-sec feats-sec" aria-labelledby="showcase-title" data-sticky-showcase>
+  <div class="wrap">
+    <div class="feats-top">
+      <div>
+        <div class="sec-label">בפועל · 3 מערכות ליבה</div>
+        <h2 id="showcase-title" class="sec-h2" data-rise>
+          איך המערכות עובדות <em>מאחורי הקלעים</em>
+        </h2>
+      </div>
+      <div class="feats-jump" role="tablist" aria-label="מעבר ישיר בין הסצנות">
+        {scenes.map((s, idx) => (
+          <button
+            type="button"
+            role="tab"
+            class="feats-jump-btn"
+            aria-selected={idx === 0 ? 'true' : 'false'}
+            data-jump-scene={idx}
+          >
+            <span dir="ltr">{s.num}</span>
+            <span>{s.title}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div class="feats-grid">
+      <div class="feats-copy-col">
+        {scenes.map((s, idx) => (
+          <article
+            class="feat-block"
+            data-feat-block={idx}
+            data-on={idx === 0 ? '' : undefined}
+          >
+            <div class="feat-inline-stage" data-inline-scene={idx}>
+              <ShowcaseSceneContent scene={s.id} />
+            </div>
+
+            <div class="feat-card-head">
+              <span class="feat-num" dir="ltr">{s.num} · {s.kicker}</span>
+              <span class="feat-active-pill" aria-hidden="true">מוצג כעת משמאל</span>
+            </div>
+            <h3 class="feat-title">{s.title}</h3>
+            <p class="feat-desc">{s.text}</p>
+            <p class="feat-hint">{s.hint}</p>
+            <div class="feat-actions">
+              <a class="feat-link" href={s.linkHref}>
+                <span>{s.linkLabel}</span>
+                <Glyph name="arrow-left" size={15} />
+              </a>
+              <button
+                type="button"
+                class="feat-focus-btn"
+                data-select-scene={idx}
+                aria-pressed={idx === 0 ? 'true' : 'false'}
+              >
+                הצג הדגמה זו
+              </button>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="feats-stage-col">
+        <div class="feats-stage" data-feats-stage data-scene="0">
+          {scenes.map((s, idx) => (
+            <div
+              class="stage-layer"
+              data-stage-layer={idx}
+              data-on={idx === 0 ? '' : undefined}
+              aria-hidden={idx !== 0 ? 'true' : 'false'}
+            >
+              <ShowcaseSceneContent scene={s.id} />
+            </div>
+          ))}
+          <div class="stage-counter" dir="ltr" aria-hidden="true">
+            <b data-stage-num>01</b> / 03
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

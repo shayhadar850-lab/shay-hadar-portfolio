@@ -1,0 +1,140 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Glyph from '../Glyph.astro';
+import { capabilities } from '../../data/portfolio';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+}
+
+const { projects } = Astro.props;
+const archData = projects.map((p) => ({
+  id: p.id,
+  shortTitle: p.data.shortTitle,
+  title: p.data.title,
+  category: p.data.category,
+  status: p.data.status,
+  role: p.data.role,
+  techStack: p.data.techStack,
+  diagram: p.data.diagram,
+  repository: p.data.repository ?? '',
+}));
+const initialProject = archData[0];
+---
+<section id="capabilities" class="page-sec cov-sec" aria-labelledby="cap-title">
+  <div class="wrap">
+    <div class="sec-label">יכולות וארכיטקטורה</div>
+    <h2 id="cap-title" class="sec-h2 cov-title" data-rise>
+      מה אפשר לבנות יחד — <em>ממשימה נקודתית ועד מערכת מלאה</em>
+    </h2>
+    <p class="sec-sub" data-rise>
+      משימה ממוקדת או מערכת שמחברת בין כמה צוותים, מקורות מידע וכלים חיצוניים.
+    </p>
+
+    <div class="cap-grid">
+      {capabilities.map((cap) => (
+        <article class="cap-item" data-rise>
+          <span class="cap-ic">
+            <Glyph name={cap.icon} size={20} stroke={1.55} />
+          </span>
+          <h3>{cap.title}</h3>
+          <p class="cap-label" dir="ltr">{cap.label}</p>
+          <ul class="cap-bullets">
+            {cap.items.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+          <a class="cap-example-link" href={`/projects/${cap.relatedSlug}/`}>
+            <span>דוגמה בפועל</span>
+            <Glyph name="arrow-left" size={14} />
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div id="architecture" class="arch-workbench" data-arch-explorer data-arch-projects={JSON.stringify(archData)} data-rise>
+      <div class="arch-ctl">
+        <div class="arch-kicker">סייר ארכיטקטורה · 6 מערכות אמיתיות</div>
+        <h3 class="arch-heading" data-arch-title><bdi dir="ltr">{initialProject.title}</bdi></h3>
+        <p class="arch-role" data-arch-role>{initialProject.role}</p>
+
+        <div class="arch-picker" role="group" aria-label="בחירת מערכת להצגת ארכיטקטורה">
+          {archData.map((p, idx) => (
+            <button
+              type="button"
+              class="arch-proj-btn"
+              aria-pressed={idx === 0 ? 'true' : 'false'}
+              data-arch-select={p.id}
+            >
+              <bdi dir="ltr">{p.shortTitle}</bdi>
+            </button>
+          ))}
+        </div>
+
+        <div class="arch-slider-box">
+          <div class="arch-slider-head">
+            <label for="arch-step-slider">צעד בזרימת המידע</label>
+            <span data-arch-step-counter>שלב 1 מתוך {initialProject.diagram.length}</span>
+          </div>
+          <input
+            id="arch-step-slider"
+            type="range"
+            class="ttl-range"
+            min="0"
+            max={String(initialProject.diagram.length - 1)}
+            value="0"
+            data-arch-slider
+          />
+          <div class="arch-slider-scale" dir="ltr">
+            <span data-arch-first>{initialProject.diagram[0]?.title}</span>
+            <span data-arch-last>{initialProject.diagram[initialProject.diagram.length - 1]?.title}</span>
+          </div>
+        </div>
+
+        <div class="arch-active-detail" aria-live="polite">
+          <span class="arch-active-tag" data-arch-step-label>שלב 01</span>
+          <strong dir="ltr" data-arch-node-title>{initialProject.diagram[0]?.title}</strong>
+          <p data-arch-node-detail>{initialProject.diagram[0]?.detail}</p>
+        </div>
+
+        <div class="arch-foot-actions">
+          <a class="button primary button-sm" href={`/projects/${initialProject.id}/`} data-arch-case-link>
+            <span>למקרה הבוחן המלא</span>
+            <Glyph name="arrow-left" size={14} />
+          </a>
+          <ul class="arch-stack-list" data-arch-stack aria-label="טכנולוגיות במערכת">
+            {initialProject.techStack.map((t) => (
+              <li dir="ltr">{t}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="arch-visual">
+        <div class="arch-visual-head">
+          <span>זרימת רכיבים ומעבר מידע</span>
+          <span class="arch-visual-cat" data-arch-cat>{initialProject.category} · {initialProject.status}</span>
+        </div>
+
+        <ol class="arch-diagram-list" data-arch-diagram aria-label="תרשים שלבי המערכת">
+          {initialProject.diagram.map((node, i) => (
+            <li class="arch-step-card" data-arch-step={i} data-active={i === 0 ? 'true' : undefined}>
+              <button type="button" class="arch-step-trigger" data-arch-step-btn={i} aria-pressed={i === 0 ? 'true' : 'false'}>
+                <span class="arch-step-index" dir="ltr">{String(i + 1).padStart(2, '0')}</span>
+                <span class="arch-step-copy">
+                  <strong dir="ltr">{node.title}</strong>
+                  <span>{node.detail}</span>
+                </span>
+                <span class="arch-step-dot" aria-hidden="true"></span>
+              </button>
+            </li>
+          ))}
+        </ol>
+
+        <p class="arch-visual-note">
+          כל תרשים נגזר ישירות מהמבנה המתועד במקרי הבוחן של ששת הפרויקטים באתר.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

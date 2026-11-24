@@ -18,9 +18,13 @@ import { he } from '../i18n/he';
     <slot name="head" />
   </head>
   <body>
+    <span class="scroll-sentinel" data-scroll-sentinel aria-hidden="true"></span>
     <a class="skip-link" href="#main">{he.skip}</a>
     <Navigation />
     <main id="main" tabindex="-1"><slot /></main>
     <Footer />
+    <script>
+      import '../scripts/site';
+    </script>
   </body>
 </html>

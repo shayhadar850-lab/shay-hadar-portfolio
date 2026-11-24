@@ -1,33 +1,136 @@
 ---
 import { he } from '../i18n/he';
+import { siteConfig } from '../config';
+import BrandMark from './BrandMark.astro';
+import Glyph from './Glyph.astro';
+
+const systemsMenu = [
+  {
+    label: 'תפעול קטלוג ומסחר',
+    text: 'Model Studio, תוספי Chrome MV3 ואינטגרציות eBay API.',
+    href: '/#showcase',
+    icon: 'store' as const,
+  },
+  {
+    label: 'תשתיות AI, סוכנים ו־MCP',
+    text: 'GPT Desktop Agent, סוכן WhatsApp וחיבורי כלים מאומתים.',
+    href: '/#architecture',
+    icon: 'spark' as const,
+  },
+  {
+    label: 'ניטור, פיקוח ותפעול מערכות',
+    text: 'שירות עצמאי מאחורי הקלעים לחברות IT, SaaS ואינטגרטורים.',
+    href: '/#services-monitoring',
+    icon: 'shield' as const,
+  },
+];
+
+const navLinks = [
+  { label: he.projects, href: '/#projects' },
+  { label: 'שירותים', href: '/#services' },
+  { label: he.capabilities, href: '/#capabilities' },
+  { label: 'לסוכנויות', href: '/#collaboration' },
+  { label: 'שאלות נפוצות', href: '/#faq' },
+];
 ---
-<header class="site-header">
-  <div class="wrap header-shell">
+<header class="site-header" data-site-nav>
+  <div class="nav-shell wrap" data-nav-box>
     <a href="/" class="brand">
-      <span class="brand-mark" dir="ltr" aria-hidden="true">SH</span>
-      <span>{he.brand}<small dir="ltr">Automation & Integrations</small></span>
+      <BrandMark size={30} />
+      <span class="brand-text">
+        <span class="brand-name">{he.brand}</span>
+        <small dir="ltr">Automation &amp; Integrations</small>
+      </span>
     </a>
-    <nav aria-label={he.navigation}>
-      <a href="/#projects">{he.projects}</a>
-      <a href="/#capabilities">{he.capabilities}</a>
-      <a href="/#collaboration">{he.collaboration}</a>
+
+    <nav class="nav-links" aria-label={he.navigation}>
+      <div class="nav-dropdown" data-nav-dropdown>
+        <button
+          type="button"
+          class="nav-link nav-dropdown-trigger"
+          aria-expanded="false"
+          aria-controls="nav-systems-panel"
+          data-dropdown-btn
+        >
+          <span>מערכות</span>
+          <Glyph name="down" size={14} class="nav-caret" />
+        </button>
+        <div id="nav-systems-panel" class="nav-dropdown-panel" data-dropdown-panel>
+          {systemsMenu.map((item) => (
+            <a href={item.href} class="nav-dropdown-item" data-nav-close>
+              <span class="nav-dropdown-ic">
+                <Glyph name={item.icon} size={17} />
+              </span>
+              <span class="nav-dropdown-copy">
+                <b>{item.label}</b>
+                <small>{item.text}</small>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {navLinks.map((link) => (
+        <a href={link.href} class="nav-link" data-nav-close>{link.label}</a>
+      ))}
     </nav>
-    <a class="button nav-contact" href="/#contact">{he.contact}</a>
+
+    <div class="nav-end">
+      <a
+        href={siteConfig.github}
+        class="nav-link nav-github"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub של שי הדר"
+        dir="ltr"
+      >
+        <Glyph name="github" size={15} />
+        <span>GitHub</span>
+      </a>
+      <a class="button primary button-sm nav-cta" href="/#contact" data-nav-close>
+        {he.contact}
+      </a>
+      <button
+        type="button"
+        class="nav-burger"
+        aria-label="פתיחת תפריט ניווט"
+        aria-expanded="false"
+        aria-controls="mobile-nav-sheet"
+        data-mobile-btn
+      >
+        <span class="burger-open"><Glyph name="menu" size={19} /></span>
+        <span class="burger-close"><Glyph name="close" size={19} /></span>
+      </button>
+    </div>
+
+    <div id="mobile-nav-sheet" class="nav-sheet" data-mobile-sheet aria-label="תפריט ניווט לנייד">
+      <div class="nav-sheet-group">
+        <span class="nav-sheet-label">מערכות ותחומי ליבה</span>
+        {systemsMenu.map((item) => (
+          <a href={item.href} class="nav-sheet-link" data-nav-close>
+            <span>{item.label}</span>
+            <Glyph name="arrow-left" size={15} />
+          </a>
+        ))}
+      </div>
+      <div class="nav-sheet-group">
+        <span class="nav-sheet-label">ניווט באתר</span>
+        {navLinks.map((link) => (
+          <a href={link.href} class="nav-sheet-link" data-nav-close>
+            <span>{link.label}</span>
+            <Glyph name="arrow-left" size={15} />
+          </a>
+        ))}
+        <a href="/projects/" class="nav-sheet-link" data-nav-close>
+          <span>כל מקרי הבוחן (6)</span>
+          <Glyph name="arrow-left" size={15} />
+        </a>
+        <a href={siteConfig.github} class="nav-sheet-link" target="_blank" rel="noopener noreferrer" data-nav-close>
+          <span dir="ltr">GitHub</span>
+          <Glyph name="external" size={14} />
+        </a>
+      </div>
+    </div>
   </div>
+  <span class="nav-progress" data-scroll-progress aria-hidden="true"></span>
 </header>
-
-<style>
-  .nav-contact {
-    min-inline-size: max-content;
-    padding-inline: 17px;
-    background: var(--sidebar);
-    border-color: var(--sidebar-border);
-    white-space: nowrap;
-  }
-
-  @media (max-width: 360px) {
-    .nav-contact { padding-inline: 12px; font-size: .79rem; }
-    .header-shell .brand { gap: 6px; }
-    .header-shell .brand small { font-size: .56rem; }
-  }
-</style>

@@ -1,0 +1,87 @@
+---
+import { engineeringPillars } from '../../data/portfolio';
+import Glyph from '../Glyph.astro';
+
+const ticks = Array.from({ length: 72 }, (_, i) => {
+  const angle = (i / 72) * Math.PI * 2;
+  const isLong = i % 6 === 0;
+  const r1 = isLong ? 128 : 136;
+  const r2 = 146;
+  return {
+    x1: (160 + Math.cos(angle) * r1).toFixed(2),
+    y1: (160 + Math.sin(angle) * r1).toFixed(2),
+    x2: (160 + Math.cos(angle) * r2).toFixed(2),
+    y2: (160 + Math.sin(angle) * r2).toFixed(2),
+    isLong,
+  };
+});
+---
+<section id="about" class="page-sec about-dial-sec" aria-labelledby="about-title">
+  <div class="wrap">
+    <div class="op-card" data-op-card>
+      <div class="op-copy">
+        <div class="sec-label sec-label-dark">קצת עליי</div>
+        <h2 id="about-title" class="op-title">
+          הנדסת תעשייה וניהול <em>בחיבור ישיר לקוד ולמערכות</em>
+        </h2>
+        <p class="op-lead">
+          אני שי הדר, סטודנט להנדסת תעשייה וניהול. אני בונה מערכות וכלי תוכנה שמחברים בין תהליכים עסקיים, נתונים ושירותים חיצוניים.
+        </p>
+        <p class="op-lead">
+          בפרויקטים שלי אני מוביל את האפיון, תכנון התהליך, האינטגרציה והבדיקות. אני משתמש בסוכני קוד מבוססי <bdi dir="ltr">AI</bdi> כחלק מהמימוש, ובודק בפועל את התוצאה.
+        </p>
+
+        <ul class="eng-pillars">
+          {engineeringPillars.map((item) => (
+            <li>
+              <strong>{item.title}</strong>
+              <span>{item.detail}</span>
+            </li>
+          ))}
+        </ul>
+
+        <a class="op-link" href="#contact">
+          <span>בואו נדבר על המשימה הבאה שלכם</span>
+          <Glyph name="arrow-left" size={15} />
+        </a>
+      </div>
+
+      <div class="op-art" aria-hidden="true">
+        <svg class="precision-dial" viewBox="0 0 320 320" width="320" height="320">
+          <circle cx="160" cy="160" r="152" fill="none" stroke="var(--deep-muted)" stroke-opacity="0.35" />
+          <g class="dial-ticks" data-dial-ticks>
+            {ticks.map((t) => (
+              <line
+                x1={t.x1}
+                y1={t.y1}
+                x2={t.x2}
+                y2={t.y2}
+                stroke="var(--deep-ink)"
+                stroke-opacity={t.isLong ? '0.72' : '0.3'}
+                stroke-width={t.isLong ? '1.6' : '1'}
+              />
+            ))}
+          </g>
+          <g class="dial-ring" data-dial-ring>
+            <circle cx="160" cy="160" r="112" fill="none" stroke="var(--deep-muted)" stroke-opacity="0.42" stroke-dasharray="2 6" />
+            <circle cx="160" cy="48" r="5.5" fill="var(--gold-bright)" />
+            <circle cx="272" cy="160" r="3.2" fill="var(--deep-ink)" />
+            <circle cx="48" cy="160" r="3" fill="var(--lilac)" />
+          </g>
+          <circle cx="160" cy="160" r="88" fill="none" stroke="var(--deep-muted)" stroke-opacity="0.28" />
+          <circle cx="160" cy="160" r="66" fill="var(--lilac)" />
+          <circle cx="160" cy="160" r="44" fill="var(--deep)" fill-opacity="0.12" />
+          <g transform="translate(136 136)" fill="none" stroke="var(--lilac-ink)" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="4" y="4" width="12" height="12" rx="3" />
+            <rect x="32" y="4" width="12" height="12" rx="3" />
+            <rect x="4" y="32" width="12" height="12" rx="3" />
+            <rect x="32" y="32" width="12" height="12" rx="3" />
+            <path d="M16 10h16M10 16v16M38 16v16M16 38h16" />
+            <circle cx="24" cy="24" r="4.5" fill="var(--gold)" stroke="none" />
+          </g>
+        </svg>
+        <span class="op-art-caption" dir="ltr">Systems · Data · Operations</span>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,230 @@
+---
+import Glyph from '../Glyph.astro';
+
+interface Props {
+  scene: 0 | 1 | 2;
+}
+
+const { scene } = Astro.props;
+
+const catalogChecks = [
+  { label: 'קליטת מוצר מ־Source או תוסף Chrome MV3', icon: 'browser' as const, dashed: false },
+  { label: 'שמירת תמונות, מפרט וגרסה ב־Supabase', icon: 'database' as const, dashed: false },
+  { label: 'הכנת הצעה לפי דרישות קטגוריה ב־eBay API', icon: 'store' as const, dashed: false },
+  { label: 'אימות Read-back ומניעת שליחה כפולה', icon: 'shield' as const, dashed: true },
+];
+---
+{scene === 0 && (
+  <div class="scene-box scene-catalog" data-scene-catalog>
+    <div class="setup-card">
+      <div class="setup-head">
+        <div>
+          <b><bdi dir="ltr">Model Studio</bdi> · בדיקת מוכנות</b>
+          <small>הדגמת שער איכות לפני פרסום ל־<bdi dir="ltr">eBay API</bdi></small>
+        </div>
+        <div class="setup-head-actions">
+          <button type="button" class="mini-pill-btn" data-cat-view-toggle aria-pressed="false">
+            צילום מסך
+          </button>
+          <button type="button" class="button primary button-xs" data-cat-replay>
+            <span>הרץ בדיקה</span>
+            <Glyph name="reset" size={13} />
+          </button>
+        </div>
+      </div>
+
+      <div class="setup-checklist-view" data-cat-panel="checks">
+        <ul class="setup-list">
+          {catalogChecks.map((item, idx) => (
+            <li>
+              <button
+                type="button"
+                class:list={['setup-row', { 'is-dashed': item.dashed }]}
+                data-cat-row={idx}
+                data-on="true"
+                aria-pressed="true"
+              >
+                <span class="setup-ic"><Glyph name={item.icon} size={15} /></span>
+                <span class="setup-row-text">{item.label}</span>
+                <span class="setup-tick" aria-hidden="true">
+                  <Glyph name="check" size={13} stroke={2.4} />
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <div class="setup-foot">
+          <span data-cat-count>4 מתוך 4 שלבים מאומתים</span>
+          <span class="setup-meter" aria-hidden="true">
+            <i data-cat-meter></i>
+          </span>
+          <span class="setup-state" data-cat-state>מוכן להצעה</span>
+        </div>
+
+        <svg class="scene-cursor" data-cat-cursor width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 3l14 7.5-6.2 1.6L10 18.5z" fill="var(--foreground)" stroke="var(--card)" stroke-width="1.4" stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <div class="setup-capture-view" data-cat-panel="capture" hidden>
+        <figure class="scene-capture">
+          <img
+            src="/media/model-studio-drafts.webp"
+            alt="רשימת טיוטות ב־Model Studio עם עמודות מחיר, מקור, סטטוס ואפשרות עריכה"
+            width={1350}
+            height={760}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>מסך הטיוטות המקורי של <bdi dir="ltr">Model Studio</bdi> עם נתוני דוגמה מקומיים.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+)}
+
+{scene === 1 && (
+  <div class="scene-box scene-ai" data-scene-ai>
+    <span class="scene-bokeh" aria-hidden="true"></span>
+    <div class="chipfloat chipfloat-a" data-ai-chip-a>
+      <Glyph name="check" size={12} stroke={2.4} />
+      <span data-ai-chip-a-text><bdi dir="ltr">MCP</bdi> · לשונית מאומתת</span>
+    </div>
+    <div class="chipfloat chipfloat-b" data-ai-chip-b>
+      <span data-ai-chip-b-text><bdi dir="ltr">Notion CRM</bdi> · סנכרון הקשר</span>
+    </div>
+
+    <div class="agent-device">
+      <div class="agent-screen">
+        <div class="agent-status-bar" dir="ltr">
+          <span>Demo · Agent Router</span>
+          <i aria-hidden="true"></i>
+        </div>
+
+        <div class="agent-kicker" data-ai-kicker>WhatsApp + Notion + Gemma</div>
+        <div class="agent-headline" data-ai-title>ניתוב פנייה עם הקשר מלא</div>
+
+        <svg class="agent-wave" viewBox="0 0 180 42" width="180" height="42" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 34 C22 30 34 24 52 25 S78 14 98 18 128 8 146 11 166 5 180 7" fill="none" stroke="var(--gold-bright)" stroke-width="1.8" />
+        </svg>
+
+        <div class="agent-trace-card">
+          <span class="agent-trace-label">מסלול פעיל (הדגמה)</span>
+          <b dir="ltr" data-ai-route>WhatsApp → Handler → Notion + Gemma</b>
+          <small data-ai-detail>שולף קטלוג מ־Notion, מנסח תשובה בשפת הלקוח ומתעד שיחה ב־CRM.</small>
+        </div>
+
+        <div class="agent-bridge-mini" data-ai-bridge hidden>
+          <img
+            src="/media/desktop-bridge.webp"
+            alt="סטטוס חיבור תוסף Chrome של GPT Desktop Agent"
+            width={300}
+            height={98}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <button type="button" class="agent-cta-btn" data-ai-open-sheet aria-expanded="false">
+          החלפת תרחיש ניתוב
+        </button>
+
+        <div class="agent-sheet" data-ai-sheet>
+          <div class="agent-sheet-grip" aria-hidden="true"></div>
+          <b>בחרו תרחיש לבדיקה (הדגמה)</b>
+          <div class="agent-sheet-opts">
+            <button type="button" class="agent-opt" data-ai-scenario="whatsapp" aria-pressed="true">
+              <span>WhatsApp → Notion CRM</span>
+              <small>שליפת קטלוג וניסוח מענה עם Gemma</small>
+            </button>
+            <button type="button" class="agent-opt" data-ai-scenario="mcp" aria-pressed="false">
+              <span>GPT Desktop Agent · MCP</span>
+              <small>הפעלת כלי על לשונית Chrome מאומתת</small>
+            </button>
+            <button type="button" class="agent-opt" data-ai-scenario="readback" aria-pressed="false">
+              <span>הפרדת שגיאת Read-back</span>
+              <small>קריאת מצב מחדש בלי להפעיל שוב</small>
+            </button>
+          </div>
+          <button type="button" class="agent-sheet-close" data-ai-close-sheet>
+            הצג תרחיש
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+{scene === 2 && (
+  <div class="scene-box scene-mail" data-scene-mail>
+    <div class="rep-card rep-card-back" aria-hidden="true"></div>
+    <div class="rep-card">
+      <div class="rep-head">
+        <div>
+          <b><bdi dir="ltr">MailDesk</bdi> · בקרת שליחה</b>
+          <small class="rep-sub">הדגמת יומן <bdi dir="ltr">SQLite</bdi> ומנגנון עצירת המשך</small>
+        </div>
+        <div class="dash-seg" role="group" aria-label="תצוגת סצנת MailDesk">
+          <button type="button" aria-pressed="true" data-mail-mode="guard">בקרה</button>
+          <button type="button" aria-pressed="false" data-mail-mode="screen">צילום מסך</button>
+        </div>
+      </div>
+
+      <div data-mail-panel="guard">
+        <div class="rep-kicker">סימולציית אירוע נמען (הדגמה)</div>
+        <div class="mail-state-picks" role="group" aria-label="בחירת מצב פנייה להדגמה">
+          <button type="button" class="mail-state-btn" aria-pressed="true" data-mail-event="queued">בתור חלון שעות</button>
+          <button type="button" class="mail-state-btn" aria-pressed="false" data-mail-event="replied">התקבלה תשובה</button>
+          <button type="button" class="mail-state-btn" aria-pressed="false" data-mail-event="unsub">בקשת הסרה</button>
+        </div>
+
+        <div class="rep-decision" data-mail-decision data-tone="active">
+          <strong data-mail-title>המשך מתוזמן כסדרו</strong>
+          <p data-mail-desc>הנמען טרם השיב; הודעת ההמשך משויכת לתיבת ה־Gmail המקורית לפי אזור הזמן ומגבלת החשבון.</p>
+        </div>
+
+        <div class="rep-metrics-grid">
+          <div>
+            <span>מצב רצף</span>
+            <b data-mail-seq>פעיל · שלב 2</b>
+          </div>
+          <div>
+            <span>יומן SQLite</span>
+            <b data-mail-ledger>מתועד ונעול</b>
+          </div>
+          <div>
+            <span>רשימת חסימה</span>
+            <b data-mail-block>לא חסום</b>
+          </div>
+        </div>
+
+        <div class="rep-bar-wrap">
+          <div class="rep-bar-head">
+            <b>שלבי בקרה לפני שליחה</b>
+            <span data-mail-bar-label>CSV → תבנית → תזמון → שליחה</span>
+          </div>
+          <div class="rep-bar" data-mail-bar="queued" aria-hidden="true">
+            <span class="rep-seg-a"></span>
+            <span class="rep-seg-b"></span>
+            <span class="rep-seg-c"></span>
+          </div>
+        </div>
+      </div>
+
+      <div data-mail-panel="screen" hidden>
+        <figure class="scene-capture">
+          <img
+            src="/media/maildesk-dashboard.webp"
+            alt="לוח הבקרה בעברית של MailDesk עם ניווט לקמפיינים, חשבונות דואר ותיבת תשובות"
+            width={1440}
+            height={593}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>לוח הבקרה המקורי של <bdi dir="ltr">MailDesk</bdi> בעברית.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+)}

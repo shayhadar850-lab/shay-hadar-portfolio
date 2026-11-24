@@ -1,11 +1,81 @@
 ---
+import { getCollection } from 'astro:content';
 import { siteConfig } from '../config';
+import BrandMark from './BrandMark.astro';
+import Glyph from './Glyph.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const wordmarkChars = Array.from('SHAY HADAR');
+const mailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent('שיתוף פעולה טכנולוגי')}`;
 ---
 <footer class="site-footer">
-  <div class="wrap footer-shell">
-    <a class="brand" href="/"><span class="brand-mark" dir="ltr" aria-hidden="true">SH</span><span>שי הדר</span></a>
-    <span dir="ltr">Automation & Integrations</span>
-    <a href={siteConfig.github} class="email-link" dir="ltr">GitHub</a>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <a class="brand" href="/">
+          <BrandMark size={30} />
+          <span class="brand-text">
+            <span class="brand-name">שי הדר</span>
+            <small dir="ltr">Automation &amp; Integrations</small>
+          </span>
+        </a>
+        <p class="footer-bio">
+          פיתוח ועיצוב אתרים, מערכות CRM, אוטומציות ותשתיות AI/MCP עבור סוכנויות וצוותי תוכנה — גם כקבלן משנה.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <b>מקרי בוחן</b>
+        {projects.map((p) => (
+          <a href={`/projects/${p.id}/`}>
+            <bdi dir="ltr">{p.data.shortTitle}</bdi>
+          </a>
+        ))}
+      </div>
+
+      <div class="footer-col">
+        <b>באתר</b>
+        <a href="/#dashboard">לוח המערכות וההדגמה</a>
+        <a href="/#showcase">תצוגות בפועל</a>
+        <a href="/#services">מסלולי שירות נפרדים</a>
+        <a href="/#services-monitoring">ניטור, פיקוח ותפעול מערכות</a>
+        <a href="/#capabilities">יכולות וארכיטקטורה</a>
+        <a href="/#collaboration">עבודה עם סוכנויות</a>
+        <a href="/#faq">שאלות נפוצות</a>
+      </div>
+
+      <div class="footer-col">
+        <b>קשר ישיר</b>
+        <a href={mailHref} dir="ltr">{siteConfig.email}</a>
+        <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" dir="ltr">GitHub</a>
+        <a href="/contact/">עמוד יצירת קשר</a>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="footer-meta">
+        <span>© שי הדר</span>
+        <span aria-hidden="true">·</span>
+        <span dir="ltr">Web · CRM · Automation · MCP</span>
+      </div>
+      <div class="footer-social">
+        <a href={mailHref} aria-label="שליחת אימייל לשי הדר">
+          <Glyph name="mail" size={15} />
+        </a>
+        <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub של שי הדר">
+          <Glyph name="github" size={15} />
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-note">
+      שקיפות: ההדגמות האינטראקטיביות בדף הן סימולציות מקומיות להמחשת ארכיטקטורה וזרימת עבודה ואינן שולחות מידע לשירותים חיצוניים. צילומי המסך באתר מבוססים על נתוני דוגמה מקומיים בלבד.
+    </p>
   </div>
-  <div class="wrap footer-wordmark" dir="ltr" aria-hidden="true">SHAY HADAR</div>
+
+  <div class="footer-bigmark" dir="ltr" aria-hidden="true" data-bigmark>
+    {wordmarkChars.map((ch) => (
+      <span class="bigmark-ch">{ch === ' ' ? '\u00A0' : ch}</span>
+    ))}
+  </div>
 </footer>
