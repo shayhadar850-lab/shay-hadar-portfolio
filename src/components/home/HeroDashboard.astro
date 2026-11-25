@@ -21,11 +21,12 @@ const projectToDemoMap: Record<string, string> = {
   'learning-studio': 'maildesk',
 };
 
-const heroLine1 = ['מערכות,', 'אתרים'];
+const heroLine1 = ['שקט', 'תפעולי', 'למערכות,'];
 const heroLine2 = [
-  { word: 'ואינטגרציות', accent: false },
-  { word: 'מקצה', accent: true },
-  { word: 'לקצה.', accent: true },
+  { word: 'אתרים', accent: false },
+  { word: 'ואוטומציות', accent: false },
+  { word: 'בריטיינר', accent: true },
+  { word: 'חודשי.', accent: true },
 ];
 
 const serializedDemos = JSON.stringify(workflowDemos);
@@ -37,7 +38,7 @@ const serializedDemos = JSON.stringify(workflowDemos);
   <div class="wrap hero-head">
     <p class="hero-eyebrow hero-fade">
       <span class="eyebrow-dot" aria-hidden="true"></span>
-      <bdi dir="ltr">Web · CRM · Automation · MCP</bdi>
+      <bdi dir="ltr">Retainers · Automation · Web · eCommerce · SEO · Marketing Ops</bdi>
     </p>
 
     <h1 id="hero-title" class="hero-h1">
@@ -63,16 +64,16 @@ const serializedDemos = JSON.stringify(workflowDemos);
     </h1>
 
     <p class="hero-lead hero-fade">
-      אני מחבר אתרי אינטרנט, מערכות <bdi dir="ltr">CRM</bdi>, ערוצי שיווק ומודלי <bdi dir="ltr">AI</bdi> לתהליכים בדוקים שעובדים יחד. פיתוח ועיצוב לסוכנויות ולצוותי תוכנה — גם כקבלן משנה.
+      זרוע ביצוע ותחזוקה חודשית (<bdi dir="ltr">White-label</bdi>) לסוכנויות דיגיטל וחברות אוטומציה — וגם ישירות לעסקים וחנויות אונליין. ניטור אוטומציות ו־<bdi dir="ltr">CRM</bdi>, תחזוקת אתרים ואיקומרס, <bdi dir="ltr">SEO</bdi> טכני ומערכות שיווק וסושיאל אוטומטיות — לפי עבודה ותוצרים, בלי חיוב לפי שעה.
     </p>
 
     <div class="hero-ctas hero-fade">
-      <a class="button primary" href="#projects">
-        <span>צפייה בפרויקטים</span>
+      <a class="button primary" href="#retainers">
+        <span>למסלולי הריטיינר והמחירים</span>
         <Glyph name="arrow-left" size={16} />
       </a>
       <a class="button button-lilac" href="#contact">
-        <span>יצירת קשר לשיתוף פעולה</span>
+        <span>בדיקת התאמה או פיילוט</span>
       </a>
     </div>
   </div>
@@ -149,9 +150,9 @@ const serializedDemos = JSON.stringify(workflowDemos);
               ))}
             </div>
 
-            <a href="#collaboration" class="dash-side-foot">
+            <a href="#retainers" class="dash-side-foot">
               <Glyph name="doc" size={14} />
-              <span>עבודה כקבלן משנה</span>
+              <span>מסלולי ריטיינר ו־White-label</span>
             </a>
           </aside>
 
@@ -540,16 +541,16 @@ const serializedDemos = JSON.stringify(workflowDemos);
       </div>
 
       <div class="hero-float hero-float-2" data-float-card="1">
-        <a href="#projects" class="flow-card flow-card-secondary">
+        <a href="#retainers" class="flow-card flow-card-secondary">
           <div class="flow-card-top">
-            <span>תיק עבודות מאומת</span>
-            <b>6 מקרי בוחן</b>
-            <em>לצפייה</em>
+            <span>מסלולי עבודה</span>
+            <b>חודשי או חד־פעמי</b>
+            <em>החל מ־290 ₪ / חודש</em>
           </div>
           <div class="flow-card-row" dir="ltr">
             <span class="flow-chip">
               <i aria-hidden="true"></i>
-              <span>Web · CRM</span>
+              <span>Care &amp; Pages</span>
             </span>
             <svg class="flow-arrow" width="38" height="10" viewBox="0 0 38 10" aria-hidden="true">
               <path d="M1 5h32" />
@@ -557,7 +558,7 @@ const serializedDemos = JSON.stringify(workflowDemos);
             </svg>
             <span class="flow-chip flow-chip-b">
               <i aria-hidden="true"></i>
-              <span>AI · MCP</span>
+              <span>Custom Systems</span>
             </span>
           </div>
         </a>

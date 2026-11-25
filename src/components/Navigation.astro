@@ -6,30 +6,30 @@ import Glyph from './Glyph.astro';
 
 const systemsMenu = [
   {
-    label: 'תפעול קטלוג ומסחר',
-    text: 'Model Studio, תוספי Chrome MV3 ואינטגרציות eBay API.',
+    label: 'חבילות ריטיינר ומחירים',
+    text: '3 מסלולים חודשיים שקופים לעסקים ישירים ולסוכנויות (White-label).',
+    href: '/#retainers',
+    icon: 'calendar' as const,
+  },
+  {
+    label: 'תחומי התפעול והתחזוקה',
+    text: 'אוטומציות ו־CRM, אתרים, איקומרס, SEO ומערכות שיווק וסושיאל.',
+    href: '/#services',
+    icon: 'shield' as const,
+  },
+  {
+    label: 'מקרי בוחן ותצוגות בפועל',
+    text: 'Model Studio, MailDesk, WhatsApp CRM וכלי AI/MCP מתועדים.',
     href: '/#showcase',
     icon: 'store' as const,
-  },
-  {
-    label: 'תשתיות AI, סוכנים ו־MCP',
-    text: 'GPT Desktop Agent, סוכן WhatsApp וחיבורי כלים מאומתים.',
-    href: '/#architecture',
-    icon: 'spark' as const,
-  },
-  {
-    label: 'ניטור, פיקוח ותפעול מערכות',
-    text: 'שירות עצמאי מאחורי הקלעים לחברות IT, SaaS ואינטגרטורים.',
-    href: '/#services-monitoring',
-    icon: 'shield' as const,
   },
 ];
 
 const navLinks = [
+  { label: 'מסלולים ומחירים', href: '/#retainers' },
+  { label: 'שירותים שוטפים', href: '/#services' },
   { label: he.projects, href: '/#projects' },
-  { label: 'שירותים', href: '/#services' },
-  { label: he.capabilities, href: '/#capabilities' },
-  { label: 'לסוכנויות', href: '/#collaboration' },
+  { label: 'איך עובדים יחד', href: '/#collaboration' },
   { label: 'שאלות נפוצות', href: '/#faq' },
 ];
 ---
@@ -39,7 +39,7 @@ const navLinks = [
       <BrandMark size={30} />
       <span class="brand-text">
         <span class="brand-name">{he.brand}</span>
-        <small dir="ltr">Automation &amp; Integrations</small>
+        <small dir="ltr">Managed Ops &amp; Retainers</small>
       </span>
     </a>
 

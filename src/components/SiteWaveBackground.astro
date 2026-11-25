@@ -1,0 +1,18 @@
+---
+import WaveMesh from './ui/wave-mesh';
+
+/**
+ * Full-viewport ambient WaveMesh background calibrated to the site's
+ * Teal Treasury palette: warm paper (#f5f4ee), deep teal dots (#1f4d52),
+ * and gold wave crests (#a8963f).
+ */
+const siteWaveColors: [string, string, string] = ['#f5f4ee', '#1f4d52', '#a8963f'];
+---
+<div class="site-wave-bg" aria-hidden="true">
+  <WaveMesh
+    client:load
+    colors={siteWaveColors}
+    crests={true}
+    className="site-wave-mesh"
+  />
+</div>

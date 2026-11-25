@@ -3,6 +3,7 @@ import '@fontsource-variable/heebo';
 import '@fontsource-variable/geist';
 import '@fontsource-variable/geist-mono';
 import '../styles/global.css';
+import SiteWaveBackground from '../components/SiteWaveBackground.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import { he } from '../i18n/he';
@@ -18,10 +19,11 @@ import { he } from '../i18n/he';
     <slot name="head" />
   </head>
   <body>
+    <SiteWaveBackground />
     <span class="scroll-sentinel" data-scroll-sentinel aria-hidden="true"></span>
     <a class="skip-link" href="#main">{he.skip}</a>
     <Navigation />
-    <main id="main" tabindex="-1"><slot /></main>
+    <main id="main" class="site-main" tabindex="-1"><slot /></main>
     <Footer />
     <script>
       import '../scripts/site';
