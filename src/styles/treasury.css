@@ -4582,15 +4582,23 @@
 
 .wave-signal-mesh {
   width: 100%;
-  height: clamp(460px, 60vh, 560px);
-  min-height: 460px;
+  min-height: clamp(480px, 62vh, 570px);
   cursor: crosshair;
+  display: flex;
+  flex-direction: column;
+}
+
+.wave-signal-mesh > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
 }
 
 .wave-signal-overlay {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1 1 auto;
+  min-height: 100%;
   padding: clamp(18px, 3vw, 28px) clamp(18px, 3.5vw, 34px);
   pointer-events: none;
 }
@@ -4861,16 +4869,43 @@
 
 @media (max-width: 640px) {
   .wave-signal-mesh {
-    height: 490px;
-    min-height: 490px;
+    min-height: 540px;
+  }
+
+  .wave-signal-overlay {
+    padding: 16px 14px 18px;
   }
 
   .wave-signal-topbar {
     justify-content: center;
+    gap: 8px;
+  }
+
+  .wave-signal-tab {
+    padding: 4px 10px;
+    font-size: 0.74rem;
+  }
+
+  .wave-signal-copy {
+    margin-top: 14px;
+  }
+
+  .wave-signal-title {
+    font-size: 1.55rem;
+  }
+
+  .wave-signal-lead {
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  .wave-signal-spacer {
+    min-height: 185px;
   }
 
   .wave-signal-foot {
     justify-content: center;
+    gap: 8px;
   }
 
   .wave-signal-hint {

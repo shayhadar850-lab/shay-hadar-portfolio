@@ -79,7 +79,9 @@ export function WaveMesh({
       visible = true,
       last = 0;
     const t0 = performance.now();
-    const ptr = { x: 0, z: 1.4, s: 0, tx: 0, tz: 1.4, ts: 0 };
+    const ptr = { x: 0, z: 1.3, s: coarse ? 0.75 : 0, tx: 0, tz: 1.3, ts: coarse ? 0.85 : 0 };
+    let touchActive = false;
+    let lastTouchEnd = -10;
     const rings: { x: number; z: number; t: number }[] = [];
 
     const resize = () => {
@@ -91,10 +93,10 @@ export function WaveMesh({
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      f = Math.max(W, H * 1.2) * 0.55; // focal length
-      hz = H * 0.3; // horizon
-      cols = Math.round(Math.min(coarse ? 78 : 150, Math.max(46, W / (coarse ? 10.5 : 9))));
-      rows = Math.round(Math.min(coarse ? 64 : 90, Math.max(42, H / (coarse ? 12 : 9.5))));
+      f = Math.max(W, H * (W < H ? 0.95 : 1.2)) * 0.55; // focal length
+      hz = H * (W < H ? 0.34 : 0.3); // horizon
+      cols = Math.round(Math.min(coarse ? 86 : 150, Math.max(52, W / (coarse ? 8 : 9))));
+      rows = Math.round(Math.min(coarse ? 68 : 90, Math.max(46, H / (coarse ? 10.5 : 9.5))));
     };
 
     // World ground spans this half-width at the far edge, so the field always fills the frame.
@@ -122,6 +124,13 @@ export function WaveMesh({
     const frame = (t: number) => {
       if (W === 0 || H === 0) return;
       ctx.clearRect(0, 0, W, H);
+      // On touch/mobile devices without hover, gently glide a soft hill across the field when idle
+      if (coarse && !touchActive && t - lastTouchEnd > 1.8) {
+        const span = Math.min(0.65, half() * 0.38);
+        ptr.tx = Math.sin(t * 0.55) * span;
+        ptr.tz = 1.25 + Math.cos(t * 0.42) * 0.32;
+        ptr.ts = 0.85;
+      }
       ptr.x += (ptr.tx - ptr.x) * 0.1;
       ptr.z += (ptr.tz - ptr.z) * 0.1;
       ptr.s += (ptr.ts - ptr.s) * 0.06;
@@ -132,8 +141,8 @@ export function WaveMesh({
         // Rows are spaced geometrically in depth, so they sit roughly evenly on screen; each row shares a size and a fog.
         const z = FAR * Math.pow(NEAR / FAR, j / (rows - 1));
         const fog = Math.pow(1 - (z - NEAR) / (FAR - NEAR), 1.25);
-        const size = Math.max(0.8, Math.min(3.2, 2.3 / z));
-        ctx.fillStyle = `rgba(${dot},${(0.12 + fog * 0.85).toFixed(3)})`;
+        const size = Math.max(coarse ? 1.35 : 0.8, Math.min(3.4, (coarse ? 2.6 : 2.3) / z));
+        ctx.fillStyle = `rgba(${dot},${(0.16 + fog * 0.82).toFixed(3)})`;
         for (let i = 0; i < cols; i++) {
           const x = -hw + (i / (cols - 1)) * hw * 2;
           const y = height(x, z, t);
@@ -148,8 +157,8 @@ export function WaveMesh({
         }
       }
       for (let k = 0; k < hot.length; k += 4) {
-        ctx.fillStyle = `rgba(${accent},${(0.2 + hot[k + 3] * 0.8).toFixed(3)})`;
-        const s = hot[k + 2] * 1.15;
+        ctx.fillStyle = `rgba(${accent},${(0.24 + hot[k + 3] * 0.76).toFixed(3)})`;
+        const s = hot[k + 2] * 1.2;
         ctx.fillRect(hot[k] - s / 2, hot[k + 1] - s / 2, s, s);
       }
     };
@@ -182,6 +191,7 @@ export function WaveMesh({
       return { x: ((sx - W / 2) * z) / f, z };
     };
     const onMove = (e: PointerEvent) => {
+      if (coarse && !touchActive) return;
       const g = ground(e);
       if (g) {
         ptr.tx = g.x;
@@ -195,7 +205,19 @@ export function WaveMesh({
     };
     const onDown = (e: PointerEvent) => {
       const g = ground(e);
-      if (g) rings.push({ x: g.x, z: g.z, t: now() });
+      if (g) {
+        touchActive = coarse;
+        ptr.tx = g.x;
+        ptr.tz = g.z;
+        ptr.ts = 1;
+        rings.push({ x: g.x, z: g.z, t: now() });
+      }
+    };
+    const onUp = () => {
+      if (touchActive) {
+        touchActive = false;
+        lastTouchEnd = now();
+      }
     };
 
     resize();
@@ -206,18 +228,17 @@ export function WaveMesh({
     });
     io.observe(host);
     const ro = new ResizeObserver(() => {
-      if (reduced) {
-        resize();
-        frame(3);
-      }
+      resize();
+      if (reduced) frame(3);
     });
     ro.observe(host);
     document.addEventListener("visibilitychange", wake);
     if (!reduced) {
       wake();
-      if (!coarse)
-        window.addEventListener("pointermove", onMove, { passive: true });
+      window.addEventListener("pointermove", onMove, { passive: true });
       window.addEventListener("pointerdown", onDown, { passive: true });
+      window.addEventListener("pointerup", onUp, { passive: true });
+      window.addEventListener("pointercancel", onUp, { passive: true });
     }
     return () => {
       cancelAnimationFrame(raf);
@@ -227,6 +248,8 @@ export function WaveMesh({
       document.removeEventListener("visibilitychange", wake);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
       canvas.remove();
     };
   }, [bgColor, dotColor, accentColor, crests]);

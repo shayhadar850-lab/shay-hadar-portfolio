@@ -119,7 +119,7 @@ export function WaveSignalShowcase() {
           <div className="wave-signal-foot">
             <div className="wave-signal-hint">
               <MousePointerClick size={14} aria-hidden="true" />
-              <span>הזיזו את העכבר או לחצו על השדה לשליחת גל ניטור</span>
+              <span>הזיזו או הקישו על גלי הנקודות לשליחת פולס ניטור</span>
             </div>
 
             <div className="wave-signal-domains" aria-label="תחומים מנוטרים">
