@@ -50,21 +50,21 @@ export default function IntegrationHero({ row1, row2 }: IntegrationHeroProps) {
       <div className="integration-hero-inner">
         <span className="integration-hero-pill">
           <Sparkles size={14} className="integration-pill-ic" aria-hidden="true" />
-          <span>חיבור מודלי AI מובילים לכלים של הארגון</span>
+          <span>אוטומציה, אינטגרציות ותשתית AI</span>
         </span>
 
         <h3 id="tools-title" className="integration-hero-title">
-          כלים, מודלי <bdi dir="ltr">AI</bdi> ומערכות <em>שעובדים יחד</em>
+          כלים וטכנולוגיות <em>שאני עובד איתם</em>
         </h3>
 
         <p className="integration-hero-lead">
-          אני מחבר מודלי <bdi dir="ltr">AI</bdi> מובילים ישירות לכלים ולמערכות שבהם הצוות והארגון שלכם כבר עובדים. היום ההבדל בין צ׳אט רגיל לסוכן <bdi dir="ltr">AI</bdi> אמיתי הוא הגישה הנכונה לנתונים ולפעולות — בצורה מבוקרת ובטוחה.
+          בונה אוטומציות, אינטגרציות וכלי עבודה במערכות שבהם הארגון שלכם כבר פועל — מחיבור <bdi dir="ltr">CRM</bdi>, <bdi dir="ltr">ERP</bdi> ו־<bdi dir="ltr">APIs</bdi>, דרך תשתיות ענן ומסדי נתונים ועד הנחת תשתית למודלי <bdi dir="ltr">AI</bdi> וסוכנים מבוקרים.
         </p>
 
         <div className="integration-hero-cta">
           <Button asChild size="lg" className="integration-cta-btn">
             <a href="#contact">
-              <span>לדבר על חיבור הכלים שלכם</span>
+              <span>לדבר על חיבור המערכות שלכם</span>
               <ArrowLeft size={16} aria-hidden="true" />
             </a>
           </Button>
