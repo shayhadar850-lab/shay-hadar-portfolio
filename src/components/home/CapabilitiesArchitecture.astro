@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import Glyph from '../Glyph.astro';
 import ToolLogo from '../ToolLogo.astro';
+import IntegrationHero from '../ui/integration-hero';
 import { coreSpecialties, toolCategories } from '../../data/portfolio';
 
 interface Props {
@@ -9,6 +10,9 @@ interface Props {
 }
 
 const { projects } = Astro.props;
+const allTools = toolCategories.flatMap((c) => c.tools);
+const marqueeRow1 = allTools.slice(0, Math.ceil(allTools.length / 2));
+const marqueeRow2 = allTools.slice(Math.ceil(allTools.length / 2));
 const archData = projects.map((p) => ({
   id: p.id,
   shortTitle: p.data.shortTitle,
@@ -59,57 +63,60 @@ const initialProject = archData[0];
       ))}
     </div>
 
-    <!-- Compact Tools & Technologies Section with Brand Logos -->
+    <!-- Animated Integration Hero + Structured 6-Category Tools Grid -->
     <div id="tools" class="tools-showcase" aria-labelledby="tools-title" data-rise>
-      <div class="tools-head">
-        <div>
-          <div class="sec-label">אקוסיסטם וטכנולוגיות</div>
-          <h3 id="tools-title" class="tools-title">כלים וטכנולוגיות שאני עובד איתם</h3>
-          <p class="tools-sub">
-            כלים שמסומנים בנקודת זהב מקושרים ישירות למקרה בוחן מתועד באתר שבו הם בשימוש בפועל.
-          </p>
-        </div>
-        <span class="tools-legend">
-          <i class="tool-linked-dot" aria-hidden="true"></i>
-          <span>מקושר למקרה בוחן באתר</span>
-        </span>
-      </div>
+      <IntegrationHero client:visible row1={marqueeRow1} row2={marqueeRow2} />
 
-      <div class="tools-categories-grid">
-        {toolCategories.map((cat) => (
-          <div class="tool-cat-card">
-            <h4 class="tool-cat-title">{cat.title}</h4>
-            <ul class="tool-chips-list" aria-label={cat.title}>
-              {cat.tools.map((tool) => (
-                <li>
-                  {tool.projectSlug ? (
-                    <a
-                      href={`/projects/${tool.projectSlug}/`}
-                      class="tool-chip tool-chip-linked"
-                      title={`לצפייה במקרה הבוחן: ${tool.projectTitle}`}
-                    >
-                      <span class="tool-chip-logo">
-                        <ToolLogo name={tool.id} size={18} />
-                      </span>
-                      <span class="tool-chip-name" dir="ltr">{tool.name}</span>
-                      <span class="tool-chip-badge" aria-hidden="true">
-                        <i class="tool-linked-dot"></i>
-                        <Glyph name="arrow-left" size={11} />
-                      </span>
-                    </a>
-                  ) : (
-                    <span class="tool-chip">
-                      <span class="tool-chip-logo">
-                        <ToolLogo name={tool.id} size={18} />
-                      </span>
-                      <span class="tool-chip-name" dir="ltr">{tool.name}</span>
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
+      <div class="tools-grid-divider">
+        <div class="tools-head tools-head-compact">
+          <div>
+            <span class="tools-sub-heading">כלים וטכנולוגיות שאני עובד איתם — לפי תחום</span>
+            <p class="tools-sub">
+              עבודה עם המודלים והחברות המובילות בתחום, מערכות ERP ו־CRM ארגוניות, ענן וכלי תלת־ממד. כלים בזהב מקושרים למקרה בוחן מתועד באתר.
+            </p>
           </div>
-        ))}
+          <span class="tools-legend">
+            <i class="tool-linked-dot" aria-hidden="true"></i>
+            <span>מקושר למקרה בוחן באתר</span>
+          </span>
+        </div>
+
+        <div class="tools-categories-grid">
+          {toolCategories.map((cat) => (
+            <div class="tool-cat-card">
+              <h4 class="tool-cat-title">{cat.title}</h4>
+              <ul class="tool-chips-list" aria-label={cat.title}>
+                {cat.tools.map((tool) => (
+                  <li>
+                    {tool.projectSlug ? (
+                      <a
+                        href={`/projects/${tool.projectSlug}/`}
+                        class="tool-chip tool-chip-linked"
+                        title={`לצפייה במקרה הבוחן: ${tool.projectTitle}`}
+                      >
+                        <span class="tool-chip-logo">
+                          <ToolLogo name={tool.id} size={18} />
+                        </span>
+                        <span class="tool-chip-name" dir="ltr">{tool.name}</span>
+                        <span class="tool-chip-badge" aria-hidden="true">
+                          <i class="tool-linked-dot"></i>
+                          <Glyph name="arrow-left" size={11} />
+                        </span>
+                      </a>
+                    ) : (
+                      <span class="tool-chip">
+                        <span class="tool-chip-logo">
+                          <ToolLogo name={tool.id} size={18} />
+                        </span>
+                        <span class="tool-chip-name" dir="ltr">{tool.name}</span>
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
 

@@ -1,4 +1,12 @@
 export type ToolLogoId =
+  | 'openai'
+  | 'claude'
+  | 'google-gemini'
+  | 'openrouter'
+  | 'sap'
+  | 'priority'
+  | 'blender'
+  | 'openscad'
   | 'make'
   | 'n8n'
   | 'rest-apis'
@@ -130,15 +138,15 @@ export const coreSpecialties: readonly CoreSpecialtyItem[] = [
   },
   {
     id: 'internal-tools-ai',
-    kicker: 'Internal Tools · Chrome MV3 · AI · MCP',
+    kicker: 'OpenAI · Claude · Gemini · OpenRouter · MCP',
     title: 'פיתוח כלים פנימיים ושילוב AI',
     description:
-      'ממשקים מותאמים, תוספי Chrome וכלים שמחברים מודלי AI למערכות חיצוניות באמצעות MCP — מותאמים בדיוק לאופן שבו הצוות עובד בפועל.',
+      'אני מחבר מודלי AI מובילים ישירות לכלים ולמערכות שבהם הצוות והארגון שלכם כבר עובדים — ממשקים מותאמים, תוספי Chrome ושרתי MCP עם הרשאות ובקרות.',
     icon: 'spark',
     points: [
-      'בניית דשבורדים וכלי תפעול פנימיים על Cloudflare Workers, Vercel ו־Supabase',
-      'פיתוח תוספי Chrome MV3 לקיצור הזנת נתונים, איסוף מידע ומיפוי טפסים',
-      'חיבור מודלי AI לכלים עסקיים, קטלוגים וממשקי עבודה דרך MCP ובקרות קלט',
+      'עבודה עם המודלים והחברות המובילות בתחום (OpenAI / GPT, Claude Code, Google Gemini, OpenRouter)',
+      'בניית דשבורדים, כלי תפעול פנימיים ותוספי Chrome MV3 על Cloudflare, Vercel ו־Supabase',
+      'מתן גישה נכונה, מאובטחת ומבוקרת לנתונים ולפעולות — ההבדל בין צ׳אט רגיל לסוכן AI אמיתי',
     ],
     relatedSlug: 'gpt-desktop-agent',
     relatedLabel: 'דוגמה: GPT Desktop Agent (MCP)',
@@ -162,6 +170,30 @@ export const coreSpecialties: readonly CoreSpecialtyItem[] = [
 
 export const toolCategories: readonly ToolCategory[] = [
   {
+    id: 'ai-models-mcp',
+    title: 'מודלי AI, סוכנים ו־MCP',
+    tools: [
+      { id: 'openai', name: 'OpenAI / GPT' },
+      { id: 'claude', name: 'Claude Code' },
+      { id: 'google-gemini', name: 'Google Gemini' },
+      { id: 'openrouter', name: 'OpenRouter' },
+      { id: 'mcp', name: 'MCP', projectSlug: 'gpt-desktop-agent', projectTitle: 'GPT Desktop Agent' },
+    ],
+  },
+  {
+    id: 'crm-erp-work',
+    title: 'CRM, ERP וניהול עבודה',
+    tools: [
+      { id: 'sap', name: 'SAP' },
+      { id: 'priority', name: 'Priority' },
+      { id: 'hubspot', name: 'HubSpot' },
+      { id: 'fireberry', name: 'Fireberry' },
+      { id: 'monday', name: 'monday.com' },
+      { id: 'notion', name: 'Notion', projectSlug: 'chrome-marketplace', projectTitle: 'Notion to Marketplace' },
+      { id: 'airtable', name: 'Airtable' },
+    ],
+  },
+  {
     id: 'automation-integrations',
     title: 'אוטומציה ואינטגרציות',
     tools: [
@@ -169,17 +201,6 @@ export const toolCategories: readonly ToolCategory[] = [
       { id: 'n8n', name: 'n8n' },
       { id: 'rest-apis', name: 'REST APIs', projectSlug: 'model-studio', projectTitle: 'Model Studio' },
       { id: 'webhooks', name: 'Webhooks' },
-    ],
-  },
-  {
-    id: 'crm-work-management',
-    title: 'CRM וניהול עבודה',
-    tools: [
-      { id: 'hubspot', name: 'HubSpot' },
-      { id: 'fireberry', name: 'Fireberry' },
-      { id: 'monday', name: 'monday.com' },
-      { id: 'notion', name: 'Notion', projectSlug: 'chrome-marketplace', projectTitle: 'Notion to Marketplace' },
-      { id: 'airtable', name: 'Airtable' },
     ],
   },
   {
@@ -192,27 +213,22 @@ export const toolCategories: readonly ToolCategory[] = [
     ],
   },
   {
-    id: 'ecommerce-payments',
-    title: 'איקומרס ותשלומים',
+    id: 'ecommerce-payments-collab',
+    title: 'איקומרס, תשלומים ושיתוף',
     tools: [
       { id: 'shopify', name: 'Shopify' },
       { id: 'paypal', name: 'PayPal' },
       { id: 'ebay', name: 'eBay API', projectSlug: 'model-studio', projectTitle: 'Model Studio' },
-    ],
-  },
-  {
-    id: 'workflows-collaboration',
-    title: 'תהליכי עבודה ושיתוף',
-    tools: [
       { id: 'google-calendar', name: 'Google Calendar' },
       { id: 'google-drive', name: 'Google Drive' },
     ],
   },
   {
-    id: 'ai-design-content',
-    title: 'AI, עיצוב ותוכן',
+    id: '3d-design-content',
+    title: 'תלת־ממד, עיצוב ותוכן',
     tools: [
-      { id: 'mcp', name: 'MCP', projectSlug: 'gpt-desktop-agent', projectTitle: 'GPT Desktop Agent' },
+      { id: 'blender', name: 'Blender' },
+      { id: 'openscad', name: 'OpenSCAD' },
       { id: 'higgsfield', name: 'Higgsfield' },
       { id: 'canva', name: 'Canva' },
     ],

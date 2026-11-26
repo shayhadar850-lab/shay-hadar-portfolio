@@ -5182,3 +5182,254 @@
     padding: 18px 14px;
   }
 }
+
+/* ==========================================================================
+   INTEGRATION HERO MARQUEE (2-ROW INFINITE TOOL LOGO SHOWCASE)
+   ========================================================================== */
+
+.integration-hero-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, #ffffff 0%, #f8f7f1 100%);
+  padding: clamp(28px, 4.5vw, 52px) 0 clamp(26px, 3.5vw, 40px);
+}
+
+.integration-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at center, rgba(15, 50, 56, 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  opacity: 0.72;
+}
+
+.integration-hero-glow {
+  position: absolute;
+  inset-inline: 10%;
+  top: -80px;
+  height: 260px;
+  background: radial-gradient(closest-side at 50% 50%, rgba(205, 200, 246, 0.42), rgba(230, 209, 132, 0.14) 52%, transparent 78%);
+  pointer-events: none;
+}
+
+.integration-hero-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.integration-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(168, 150, 63, 0.35);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 620;
+  box-shadow: 0 2px 10px -6px rgba(15, 50, 56, 0.25);
+}
+
+.integration-pill-ic {
+  color: var(--gold-bright);
+  flex: none;
+}
+
+.integration-hero-title {
+  margin-top: 14px;
+  padding-inline: 20px;
+  font-size: clamp(1.65rem, 3.2vw, 2.55rem);
+  font-weight: 660;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: var(--foreground);
+}
+
+.integration-hero-title em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.integration-hero-lead {
+  margin: 14px auto 0;
+  padding-inline: 20px;
+  max-width: 660px;
+  font-size: clamp(0.93rem, 1.35vw, 1.03rem);
+  line-height: 1.68;
+  color: var(--muted-foreground);
+}
+
+.integration-hero-cta {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+}
+
+.integration-cta-btn {
+  gap: 8px;
+  padding-inline: 24px !important;
+  background: linear-gradient(180deg, #164851, #0c2f35) !important;
+  color: #ffffff !important;
+  box-shadow: 0 14px 28px -16px rgba(12, 47, 53, 0.7) !important;
+}
+
+.integration-cta-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.integration-marquee-stage {
+  position: relative;
+  margin-top: 32px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-block: 6px;
+}
+
+.integration-marquee-row {
+  overflow: hidden;
+  width: 100%;
+}
+
+.integration-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
+}
+
+.animate-integration-left {
+  animation: integration-scroll-left 38s linear infinite;
+}
+
+.animate-integration-right {
+  animation: integration-scroll-right 42s linear infinite;
+}
+
+.integration-marquee-stage:hover .integration-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes integration-scroll-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes integration-scroll-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.integration-bubble-link {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+.integration-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 20px -14px rgba(16, 41, 45, 0.25);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  flex: none;
+}
+
+.integration-bubble.is-linked {
+  border-color: rgba(168, 150, 63, 0.45);
+}
+
+.integration-bubble:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: 0 12px 24px -14px rgba(15, 50, 56, 0.38);
+}
+
+.integration-bubble-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fafaf6;
+  border: 1px solid rgba(16, 41, 45, 0.08);
+  flex: none;
+}
+
+.integration-bubble-circle .tool-logo-svg {
+  width: 24px;
+  height: 24px;
+}
+
+.integration-bubble-name {
+  font-size: 0.82rem;
+  font-weight: 620;
+  color: var(--foreground);
+  white-space: nowrap;
+}
+
+.integration-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(36px, 8vw, 96px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.integration-fade-left {
+  left: 0;
+  background: linear-gradient(to right, #faf9f4, transparent);
+}
+
+.integration-fade-right {
+  right: 0;
+  background: linear-gradient(to left, #faf9f4, transparent);
+}
+
+.tools-grid-divider {
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.tools-head-compact {
+  margin-bottom: 18px;
+}
+
+.tools-sub-heading {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: 640;
+  color: var(--foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-integration-left,
+  .animate-integration-right {
+    animation: none !important;
+  }
+
+  .integration-marquee-row {
+    overflow-x: auto;
+  }
+}
