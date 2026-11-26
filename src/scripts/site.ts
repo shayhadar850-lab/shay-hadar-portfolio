@@ -150,7 +150,7 @@ function initContactSurface(): void {
 
     for (const btn of topicBtns) {
       btn.addEventListener('click', () => {
-        const subject = btn.dataset.topicSubject ?? 'שיתוף פעולה טכנולוגי';
+        const subject = btn.dataset.topicSubject ?? 'פנייה לגבי פרויקט או שיתוף פעולה';
         for (const other of topicBtns) {
           other.setAttribute('aria-pressed', String(other === btn));
         }

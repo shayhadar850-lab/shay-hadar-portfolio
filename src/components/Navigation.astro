@@ -4,33 +4,17 @@ import { siteConfig } from '../config';
 import BrandMark from './BrandMark.astro';
 import Glyph from './Glyph.astro';
 
-const systemsMenu = [
-  {
-    label: 'חבילות ריטיינר ומחירים',
-    text: '3 מסלולים חודשיים שקופים לעסקים ישירים ולסוכנויות (White-label).',
-    href: '/#retainers',
-    icon: 'calendar' as const,
-  },
-  {
-    label: 'תחומי התפעול והתחזוקה',
-    text: 'אוטומציות ו־CRM, אתרים, איקומרס, SEO ומערכות שיווק וסושיאל.',
-    href: '/#services',
-    icon: 'shield' as const,
-  },
-  {
-    label: 'מקרי בוחן ותצוגות בפועל',
-    text: 'Model Studio, MailDesk, WhatsApp CRM וכלי AI/MCP מתועדים.',
-    href: '/#showcase',
-    icon: 'store' as const,
-  },
+const navLinks = [
+  { label: he.capabilities, href: '/#capabilities' },
+  { label: he.projects, href: '/#featured-projects' },
+  { label: he.collaboration, href: '/#collaboration' },
 ];
 
-const navLinks = [
-  { label: 'מסלולים ומחירים', href: '/#retainers' },
-  { label: 'שירותים שוטפים', href: '/#services' },
-  { label: he.projects, href: '/#projects' },
-  { label: 'איך עובדים יחד', href: '/#collaboration' },
-  { label: 'שאלות נפוצות', href: '/#faq' },
+const mobileQuickLinks = [
+  { label: 'פרויקטים נבחרים', href: '/#featured-projects' },
+  { label: 'יכולות וכלים', href: '/#capabilities' },
+  { label: 'כלים וטכנולוגיות', href: '/#tools' },
+  { label: 'איך המערכות עובדות', href: '/#showcase' },
 ];
 ---
 <header class="site-header" data-site-nav>
@@ -39,40 +23,15 @@ const navLinks = [
       <BrandMark size={30} />
       <span class="brand-text">
         <span class="brand-name">{he.brand}</span>
-        <small dir="ltr">Managed Ops &amp; Retainers</small>
+        <small>{he.role}</small>
       </span>
     </a>
 
     <nav class="nav-links" aria-label={he.navigation}>
-      <div class="nav-dropdown" data-nav-dropdown>
-        <button
-          type="button"
-          class="nav-link nav-dropdown-trigger"
-          aria-expanded="false"
-          aria-controls="nav-systems-panel"
-          data-dropdown-btn
-        >
-          <span>מערכות</span>
-          <Glyph name="down" size={14} class="nav-caret" />
-        </button>
-        <div id="nav-systems-panel" class="nav-dropdown-panel" data-dropdown-panel>
-          {systemsMenu.map((item) => (
-            <a href={item.href} class="nav-dropdown-item" data-nav-close>
-              <span class="nav-dropdown-ic">
-                <Glyph name={item.icon} size={17} />
-              </span>
-              <span class="nav-dropdown-copy">
-                <b>{item.label}</b>
-                <small>{item.text}</small>
-              </span>
-            </a>
-          ))}
-        </div>
-      </div>
-
       {navLinks.map((link) => (
         <a href={link.href} class="nav-link" data-nav-close>{link.label}</a>
       ))}
+      <a href="/#contact" class="nav-link nav-link-contact-inline" data-nav-close>{he.contact}</a>
     </nav>
 
     <div class="nav-end">
@@ -105,8 +64,8 @@ const navLinks = [
 
     <div id="mobile-nav-sheet" class="nav-sheet" data-mobile-sheet aria-label="תפריט ניווט לנייד">
       <div class="nav-sheet-group">
-        <span class="nav-sheet-label">מערכות ותחומי ליבה</span>
-        {systemsMenu.map((item) => (
+        <span class="nav-sheet-label">יכולות ופרויקטים</span>
+        {mobileQuickLinks.map((item) => (
           <a href={item.href} class="nav-sheet-link" data-nav-close>
             <span>{item.label}</span>
             <Glyph name="arrow-left" size={15} />
@@ -115,14 +74,20 @@ const navLinks = [
       </div>
       <div class="nav-sheet-group">
         <span class="nav-sheet-label">ניווט באתר</span>
-        {navLinks.map((link) => (
-          <a href={link.href} class="nav-sheet-link" data-nav-close>
-            <span>{link.label}</span>
-            <Glyph name="arrow-left" size={15} />
-          </a>
-        ))}
+        <a href="/#collaboration" class="nav-sheet-link" data-nav-close>
+          <span>{he.collaboration}</span>
+          <Glyph name="arrow-left" size={15} />
+        </a>
+        <a href="/#packages" class="nav-sheet-link" data-nav-close>
+          <span>אפשרויות עבודה וחבילות</span>
+          <Glyph name="arrow-left" size={15} />
+        </a>
         <a href="/projects/" class="nav-sheet-link" data-nav-close>
           <span>כל מקרי הבוחן (6)</span>
+          <Glyph name="arrow-left" size={15} />
+        </a>
+        <a href="/#contact" class="nav-sheet-link" data-nav-close>
+          <span>{he.contact}</span>
           <Glyph name="arrow-left" size={15} />
         </a>
         <a href={siteConfig.github} class="nav-sheet-link" target="_blank" rel="noopener noreferrer" data-nav-close>

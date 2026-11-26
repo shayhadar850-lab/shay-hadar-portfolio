@@ -44,9 +44,9 @@ const SIGNAL_THEMES: readonly SignalTheme[] = [
 
 const MONITORED_DOMAINS = [
   'Make / n8n',
-  'CRM & Webhooks',
-  'eCommerce',
-  'Web & SEO',
+  'REST APIs & Webhooks',
+  'CRM & Databases',
+  'AI & MCP',
 ] as const;
 
 export function WaveSignalShowcase() {
@@ -104,11 +104,11 @@ export function WaveSignalShowcase() {
               OPERATIONAL HORIZON · LIVE SYSTEM MONITORING
             </p>
             <h2 id="signal-horizon-title" className="wave-signal-title">
-              כל אוטומציה, חנות ומערכת — <em>בתצפית שקטה אחת.</em>
+              אינטגרציות שעובדות <em>עם ניטור ואימות מצב.</em>
             </h2>
             <p className="wave-signal-lead">
-              במקום לגלות תקלות רק כשלקוח מתלונן, שכבת הניטור והתחזוקה השוטפת
-              מזהה כל חריגה בזמן אמת ומייצבת את התשתית מאחורי הקלעים.
+              במקום לגלות תקלה רק כשנתונים חסרים או כשלקוח פונה, בקרות ניטור ו־Read-back
+              מזהות כשלים שקטים ומאמתות שהפעולה הושלמה במערכת היעד.
             </p>
           </div>
 
@@ -131,8 +131,8 @@ export function WaveSignalShowcase() {
               ))}
             </div>
 
-            <a href="#services-monitoring" className="wave-signal-cta">
-              <span>איך הניטור עובד בפועל</span>
+            <a href="#specialty-monitoring-qa" className="wave-signal-cta">
+              <span>לניטור ובקרת איכות</span>
               <ArrowLeft size={14} aria-hidden="true" />
             </a>
           </div>

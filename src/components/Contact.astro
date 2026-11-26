@@ -8,8 +8,8 @@ interface Props {
 }
 
 const { heading: Heading = 'h2' } = Astro.props;
-const defaultTopic = contactTopics[0];
-const initialMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(defaultTopic.subject)}`;
+const defaultSubject = siteConfig.defaultMailSubject;
+const initialMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(defaultSubject)}`;
 ---
 <section id="contact" class="cta-section" aria-labelledby="contact-title">
   <div class="cta-surface" data-cta-surface data-email={siteConfig.email}>
@@ -20,12 +20,12 @@ const initialMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(d
 
     <div class="cta-inner">
       <div class="cta-copy">
-        <p class="section-pill">שיחת התאמה או פיילוט ראשון</p>
+        <p class="section-pill">יצירת קשר</p>
         <Heading id="contact-title" class="cta-title">
-          רוצים שקט תפעולי <em>בריטיינר חודשי אחד?</em>
+          ספרו לי מה אתם רוצים <em>לחבר, לבנות או לשפר</em>
         </Heading>
         <p class="cta-lead">
-          מנהלים סוכנות או חברת אוטומציה ומחפשים זרוע ביצוע קבועה ב־<bdi dir="ltr">White-label</bdi> — או בעלי עסק/חנות שרוצים כתובת אחת לניטור, תחזוקה, <bdi dir="ltr">SEO</bdi> ושיווק? כתבו לי בקצרה אילו מערכות פועלות אצלכם ואפשר להתחיל מפיילוט קליטה קצר או חודש ניסיון ללא התחייבות.
+          יש לכם תהליך ידני שרוצים להפוך לאוטומטי, אינטגרציה קיימת שדורשת ייצוב וניטור, או כלי פנימי שצריך לבנות לצוות? כתבו לי בכמה משפטים על המערכות והמטרה ונבדוק יחד איך הכי נכון להתקדם.
         </p>
 
         <div class="cta-topics" role="group" aria-label="בחירת נושא לפנייה במייל">
@@ -70,6 +70,10 @@ const initialMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(d
         <div class="cta-meta-row">
           <a href={initialMailto} class="email-link" dir="ltr" data-mailto-secondary>
             {siteConfig.email}
+          </a>
+          <span aria-hidden="true">·</span>
+          <a href={`tel:${siteConfig.phone.replace(/-/g, '')}`} class="email-link" dir="ltr">
+            {siteConfig.phone}
           </a>
           <span class="cta-copy-status" role="status" aria-live="polite" data-copy-status></span>
         </div>

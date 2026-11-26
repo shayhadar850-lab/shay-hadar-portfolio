@@ -100,12 +100,12 @@ const absoluteImageURL = ogImage.startsWith('http') ? ogImage : `${siteURL}${ogI
 <!-- Open Graph Tags -->
 <meta property="og:type" content={type} />
 <meta property="og:url" content={currentURL} />
-<meta property="og:title" content={title} />
+<meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={absoluteImageURL} />
 <meta property="og:site_name" content={siteConfig.title} />
 <meta property="og:locale" content="he_IL" />
-<meta property="og:image:alt" content="Shay Hadar — Automation & Integrations" />
+<meta property="og:image:alt" content={siteConfig.title} />
 
 <!-- Article-specific Open Graph tags -->
 {type === 'article' && publishDate && (
@@ -120,6 +120,6 @@ const absoluteImageURL = ogImage.startsWith('http') ? ogImage : `${siteURL}${ogI
 <!-- Twitter Card Tags -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={currentURL} />
-<meta name="twitter:title" content={title} />
+<meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={absoluteImageURL} />

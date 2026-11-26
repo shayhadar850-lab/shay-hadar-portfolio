@@ -1,0 +1,125 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Glyph from '../Glyph.astro';
+import { featuredProjectsMeta } from '../../data/portfolio';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+}
+
+const { projects } = Astro.props;
+const projectMap = new Map(projects.map((p) => [p.id, p]));
+const featuredItems = featuredProjectsMeta
+  .map((meta) => {
+    const entry = projectMap.get(meta.slug);
+    return entry ? { meta, project: entry } : null;
+  })
+  .filter((item): item is { meta: (typeof featuredProjectsMeta)[number]; project: CollectionEntry<'projects'> } => Boolean(item));
+---
+<section id="featured-projects" class="page-sec featured-sec" aria-labelledby="featured-projects-title">
+  <div class="wrap">
+    <div class="projects-head">
+      <div>
+        <div class="sec-label">פרויקטים נבחרים</div>
+        <h2 id="featured-projects-title" class="sec-h2" data-rise>
+          שלוש מערכות שממחישות <em>איך אני בונה ומחבר</em>
+        </h2>
+        <p class="sec-sub" data-rise>
+          כל מערכת פותרת בעיה תפעולית מוגדרת, מחברת בין כלים ושומרת על בקרת איכות ואימות מצב מול מערכת היעד.
+        </p>
+      </div>
+
+      <a class="button" href="#projects">
+        <span>לכל 6 הפרויקטים</span>
+        <Glyph name="arrow-left" size={15} />
+      </a>
+    </div>
+
+    <div class="res-grid featured-grid">
+      {featuredItems.map(({ meta, project }) => {
+        const { data } = project;
+        return (
+          <article class:list={['res-card', 'featured-res-card', 'accent-' + data.accent]} data-rise>
+            <a class="res-card-link" href={`/projects/${project.id}/`}>
+              <div class="res-thumb">
+                {data.media ? (
+                  <div class="res-art res-art-media">
+                    <img
+                      src={data.media.src}
+                      alt={data.media.alt}
+                      width={data.media.width}
+                      height={data.media.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span class="res-cover-tag">צילום ממשק מקורי</span>
+                  </div>
+                ) : (
+                  <div class="res-art res-art-bridge" aria-hidden="true">
+                    <div class="art-win">
+                      <div class="art-dots"><i></i><i></i><i></i></div>
+                      <span class="art-kicker" dir="ltr">MCP · Windows + Chrome</span>
+                      <div class="art-bridge-img">
+                        <img
+                          src="/media/desktop-bridge.webp"
+                          alt=""
+                          width={300}
+                          height={98}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                      <div class="art-trace" dir="ltr">
+                        <span>AI Agent</span>
+                        <em>→</em>
+                        <span>MCP Server</span>
+                        <em>→</em>
+                        <span>Bridge</span>
+                      </div>
+                    </div>
+                    <span class="res-cover-tag">צילום תוסף + ארכיטקטורה</span>
+                  </div>
+                )}
+              </div>
+
+              <div class="res-cap">
+                <div class="res-meta-row">
+                  <span class="res-cat">{data.category}</span>
+                  <span class="res-status">{data.status}</span>
+                </div>
+                <h3 class="res-title"><bdi dir="ltr">{data.shortTitle}</bdi></h3>
+                <p class="featured-summary">{meta.summary}</p>
+
+                <dl class="featured-facts">
+                  <div>
+                    <dt>הבעיה</dt>
+                    <dd>{meta.problem}</dd>
+                  </div>
+                  <div>
+                    <dt>מה נבנה</dt>
+                    <dd>{meta.built}</dd>
+                  </div>
+                  <div>
+                    <dt>בדיקות וסטטוס</dt>
+                    <dd>{meta.evidence}</dd>
+                  </div>
+                </dl>
+
+                <ul class="res-tags" aria-label="טכנולוגיות">
+                  {data.techStack.slice(0, 4).map((t) => (
+                    <li dir="ltr">{t}</li>
+                  ))}
+                </ul>
+
+                <div class="res-foot">
+                  <span>למקרה הבוחן המלא</span>
+                  <Glyph name="arrow-left" size={15} class="res-arrow" />
+                </div>
+              </div>
+            </a>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>

@@ -3,7 +3,7 @@ import { siteConfig } from '../../config';
 import { faqs } from '../../data/portfolio';
 import Glyph from '../Glyph.astro';
 
-const mailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent('שאלה בנושא שיתוף פעולה')}`;
+const mailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent(siteConfig.defaultMailSubject)}`;
 ---
 <section id="faq" class="page-sec faq-sec" aria-labelledby="faq-title" data-faq-group>
   <div class="wrap split-layout">

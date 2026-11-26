@@ -157,11 +157,11 @@
 }
 
 .hero-h1 {
-  font-size: clamp(2.15rem, 4.95vw, 4.45rem);
+  font-size: clamp(2rem, 4.35vw, 3.85rem);
   font-weight: 660;
-  letter-spacing: -0.038em;
-  line-height: 1.05;
-  max-width: 24ch;
+  letter-spacing: -0.036em;
+  line-height: 1.08;
+  max-width: 26ch;
 }
 
 .hero-line {
@@ -183,11 +183,12 @@
 }
 
 .hero-line:nth-child(1) .hero-mask:nth-child(2) .hero-word { animation-delay: 0.05s; }
-.hero-line:nth-child(1) .hero-mask:nth-child(3) .hero-word { animation-delay: 0.1s; }
-.hero-line:nth-child(2) .hero-mask:nth-child(1) .hero-word { animation-delay: 0.14s; }
-.hero-line:nth-child(2) .hero-mask:nth-child(2) .hero-word { animation-delay: 0.19s; }
-.hero-line:nth-child(2) .hero-mask:nth-child(3) .hero-word { animation-delay: 0.24s; }
-.hero-line:nth-child(2) .hero-mask:nth-child(4) .hero-word { animation-delay: 0.29s; }
+.hero-line:nth-child(1) .hero-mask:nth-child(3) .hero-word { animation-delay: 0.09s; }
+.hero-line:nth-child(1) .hero-mask:nth-child(4) .hero-word { animation-delay: 0.13s; }
+.hero-line:nth-child(2) .hero-mask:nth-child(1) .hero-word { animation-delay: 0.17s; }
+.hero-line:nth-child(2) .hero-mask:nth-child(2) .hero-word { animation-delay: 0.22s; }
+.hero-line:nth-child(2) .hero-mask:nth-child(3) .hero-word { animation-delay: 0.27s; }
+.hero-line:nth-child(2) .hero-mask:nth-child(4) .hero-word { animation-delay: 0.31s; }
 
 @keyframes word-rise {
   from {
@@ -3812,7 +3813,7 @@
 }
 
 /* ==========================================================================
-   6. DEEP TEAL CONTRAST BAND — WHITE-LABEL / SUBCONTRACTING
+   6. DEEP TEAL CONTRAST BAND — HOW WE WORK TOGETHER
    ========================================================================== */
 
 .collab-sec {
@@ -4929,5 +4930,255 @@
 
   .ink-word {
     opacity: 1 !important;
+  }
+}
+
+/* ==========================================================================
+   FEATURED PROJECTS, UNIFIED SPECIALTIES & BRANDED TOOLS ECOSYSTEM
+   ========================================================================== */
+
+.nav-link-contact-inline {
+  display: none;
+}
+
+.featured-sec {
+  border-top: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse 68% 48% at 50% 0%, rgba(205, 200, 246, 0.2), transparent 72%),
+    var(--background);
+}
+
+.featured-summary {
+  font-size: 0.9rem;
+  font-weight: 560;
+  color: var(--deep-ink);
+  line-height: 1.55;
+}
+
+.featured-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.featured-facts > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.featured-facts dt {
+  font-size: 0.72rem;
+  font-weight: 650;
+  color: var(--gold-on-dark);
+  letter-spacing: 0.01em;
+}
+
+.featured-facts dd {
+  font-size: 0.81rem;
+  color: var(--deep-muted);
+  line-height: 1.5;
+}
+
+/* Unified 3-column specialty cards */
+.cap-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.specialty-card {
+  gap: 12px;
+  padding: 24px 22px;
+  box-shadow: var(--surface-shadow);
+}
+
+.specialty-card h3 {
+  font-size: 1.18rem;
+  font-weight: 640;
+  letter-spacing: -0.02em;
+}
+
+.specialty-desc {
+  font-size: 0.91rem;
+  color: var(--muted-foreground);
+  line-height: 1.62;
+}
+
+/* Compact Tools & Technologies Showcase with Official Logos */
+.tools-showcase {
+  margin-top: 38px;
+  padding: clamp(22px, 3vw, 32px);
+  border-radius: 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 44px -34px rgba(16, 41, 45, 0.24);
+}
+
+.tools-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.tools-title {
+  margin-top: 8px;
+  font-size: clamp(1.35rem, 2.3vw, 1.85rem);
+  font-weight: 640;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
+}
+
+.tools-sub {
+  margin-top: 6px;
+  font-size: 0.88rem;
+  color: var(--muted-foreground);
+  max-width: 560px;
+}
+
+.tools-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  font-size: 0.76rem;
+  font-weight: 560;
+  color: var(--muted-foreground);
+}
+
+.tool-linked-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  flex: none;
+}
+
+.tools-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.tool-cat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--background);
+  border: 1px solid var(--border);
+}
+
+.tool-cat-title {
+  font-size: 0.82rem;
+  font-weight: 650;
+  color: var(--gold);
+  letter-spacing: -0.01em;
+}
+
+.tool-chips-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tool-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 6px 11px;
+  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  font-size: 0.82rem;
+  font-weight: 580;
+  box-shadow: 0 1px 2px rgba(16, 41, 45, 0.05);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.tool-chip-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid rgba(16, 41, 45, 0.08);
+  flex: none;
+}
+
+.tool-logo-svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+  flex: none;
+}
+
+.tool-chip-name {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.tool-chip-linked {
+  border-color: rgba(168, 150, 63, 0.42);
+  background: linear-gradient(180deg, #ffffff, #faf8f0);
+}
+
+.tool-chip-linked:hover {
+  border-color: var(--primary);
+  background: var(--card);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -16px rgba(15, 50, 56, 0.45);
+}
+
+.tool-chip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--gold);
+  margin-inline-start: 2px;
+}
+
+.tool-chip-linked:hover .tool-chip-badge {
+  color: var(--primary);
+}
+
+@media (max-width: 1024px) {
+  .tools-categories-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 960px) {
+  .cap-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .tools-categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tools-showcase {
+    padding: 18px 14px;
   }
 }

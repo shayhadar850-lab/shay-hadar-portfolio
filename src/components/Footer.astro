@@ -1,12 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import { siteConfig } from '../config';
+import { he } from '../i18n/he';
 import BrandMark from './BrandMark.astro';
 import Glyph from './Glyph.astro';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const wordmarkChars = Array.from('SHAY HADAR');
-const mailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent('שיתוף פעולה טכנולוגי')}`;
+const mailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent(siteConfig.defaultMailSubject)}`;
 ---
 <footer class="site-footer">
   <div class="wrap">
@@ -15,12 +16,12 @@ const mailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent('שי�
         <a class="brand" href="/">
           <BrandMark size={30} />
           <span class="brand-text">
-            <span class="brand-name">שי הדר</span>
-            <small dir="ltr">Managed Ops &amp; Retainers</small>
+            <span class="brand-name">{he.brand}</span>
+            <small>{he.role}</small>
           </span>
         </a>
         <p class="footer-bio">
-          ריטיינרים חודשיים לניטור, תחזוקה ושיפור שוטף של אוטומציות, CRM, אתרים, חנויות איקומרס, SEO ומערכות שיווק — לעסקים ישירים ולסוכנויות ב־White-label.
+          עוזר לארגונים, לחברות טכנולוגיה ולצוותי תפעול לחבר בין מערכות, להפוך עבודה ידנית לאוטומטית, לבנות כלים פנימיים ולתחזק אינטגרציות קיימות עם ניטור ובקרות.
         </p>
       </div>
 
@@ -35,11 +36,12 @@ const mailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent('שי�
 
       <div class="footer-col">
         <b>באתר</b>
-        <a href="/#retainers">חבילות ריטיינר ומחירים</a>
-        <a href="/#services">6 תחומי התפעול והתחזוקה</a>
-        <a href="/#services-monitoring">ניטור ותפעול מאחורי הקלעים</a>
-        <a href="/#projects">מקרי בוחן (6 מערכות)</a>
-        <a href="/#collaboration">לעסקים ולסוכנויות (White-label)</a>
+        <a href="/#featured-projects">פרויקטים נבחרים</a>
+        <a href="/#capabilities">יכולות והתמחויות</a>
+        <a href="/#tools">כלים וטכנולוגיות</a>
+        <a href="/#projects">כל הפרויקטים (6 מערכות)</a>
+        <a href="/#collaboration">איך עובדים יחד</a>
+        <a href="/#packages">אפשרויות עבודה ומסגרות</a>
         <a href="/#faq">שאלות נפוצות</a>
       </div>
 
@@ -56,7 +58,7 @@ const mailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent('שי�
       <div class="footer-meta">
         <span>© שי הדר</span>
         <span aria-hidden="true">·</span>
-        <span dir="ltr">Retainers · Automation · Web · eCommerce · SEO</span>
+        <span dir="ltr">Automation · Integrations · Internal Tools · AI &amp; MCP</span>
       </div>
       <div class="footer-social">
         <a href={mailHref} aria-label="שליחת אימייל לשי הדר">

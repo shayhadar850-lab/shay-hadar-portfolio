@@ -8,16 +8,16 @@ const initialMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(d
 
 const coreSteps = [
   {
-    title: 'מתחילים מפיילוט קליטה ממוקד (שלב 0)',
-    detail: 'פותרים תקלה אחת בוערת או ממפים את המערכות והתהליכים הקיימים — כדי לראות תוצאות בפועל לפני שמתחייבים.',
+    title: 'אפשר להתחיל ממשימה ממוקדת',
+    detail: 'אבחון ותיקון אינטגרציה קיימת, חיבור API או הוספת שכבת ניטור ובקרה — כדי לראות תוצאות ואיכות עבודה בפועל כבר בשלב הראשון.',
   },
   {
-    title: 'עוברים לריטיינר חודשי לפי תכולה ברורה',
-    detail: 'בוחרים חבילה (בסיסית, בינונית או מנוהלת בהתאמה אישית) לעסק ישיר או כקיבולת White-label לסוכנות על פני כמה לקוחות — בלי חיוב לפי שעה.',
+    title: 'השתלבות ישירה עם הצוות והכלים שלכם',
+    detail: 'אני לוקח אחריות על אינטגרציה, אוטומציה או חלק מוגדר בפרויקט — עובד מסודר עם הגדרת ממשקים, בדיקות ותיעוד מלא.',
   },
   {
-    title: 'שקט תפעולי ושיפור מתמיד כל חודש',
-    detail: 'ניטור תקלות שוטף, תחזוקת אתרים ואיקומרס, SEO, מערכות סושיאל ותיעוד מסודר — עם חודש ראשון ללא התחייבות להמשך.',
+    title: 'בניית מערכת חדשה או המשך בליווי טכני שוטף',
+    detail: 'אחרי שהמערכת עולה לאוויר, אפשר להעביר אותה אליכם עם תיעוד והדרכה או להמשיך בליווי שוטף לניטור, תחזוקה ושיפורים.',
   },
 ];
 ---
@@ -25,14 +25,14 @@ const coreSteps = [
   <span class="collab-glow" aria-hidden="true"></span>
 
   <div class="wrap split-layout">
-    <div class="sec-label sec-label-dark" dir="ltr">Direct &amp; White-label</div>
+    <div class="sec-label sec-label-dark">איך עובדים יחד</div>
 
     <div class="collab-content">
       <h2 id="collab-title" class="collab-big" data-rise>
-        <span>זרוע ביצוע ב־White-label לסוכנויות</span> וחברות אוטומציה
+        <span>משימה ממוקדת, פיתוח מערכת</span> או השתלבות עם הצוות שלכם
       </h2>
       <p class="collab-intro" data-rise>
-        אתם מנהלים את הקשר מול הלקוח ומוכרים תחזוקה, אוטומציה, איקומרס, <bdi dir="ltr">SEO</bdi> ושיווק תחת המותג שלכם — ואני מבצע מאחורי הקלעים באופן שוטף וקבוע. זמין גם ישירות לעסקים וחנויות אונליין.
+        אני יכול להשתלב עם הצוות שלכם ולקחת אחריות על אינטגרציה, אוטומציה או חלק מוגדר בפרויקט, כולל בדיקות ותיעוד. אפשר להתחיל ממשימה ממוקדת, לבנות מערכת חדשה או להמשיך בליווי טכני שוטף.
       </p>
 
       <ul class="collab-list" data-check-list>
@@ -58,12 +58,12 @@ const coreSteps = [
             <span class="plus-icon" data-addon-icon>
               <Glyph name="plus" size={16} />
             </span>
-            <span>איך נראית מסירה ודיווח חודשי ב־White-label?</span>
+            <span>מה כולל תיעוד ומסירה מסודרת לצוות?</span>
           </button>
           <div id="collab-addon-body" class="collapse-grid" data-addon-panel>
             <div>
               <p>
-                כל חודש (וכל משימה שוטפת) מלווה בתיעוד מסודר שניתן להעביר ישירות ללקוח הקצה תחת המותג שלכם: תקלות שזוהו ונפתרו, בדיקות תקינות וניטור, שיפורי SEO/אתר/איקומרס שבוצעו, טריגרים וחיבורי API מעודכנים וסטטוס תור המשימות לחודש הבא.
+                כל אינטגרציה או מערכת נמסרת עם מיפוי ברור של הטריגרים, חיבורי ה־API, מבנה הנתונים, ההרשאות, בדיקות הקצה שנערכו ומה עושים במקרה של חריגה — כדי שהצוות שלכם יישאר בשליטה מלאה בלי תלות סמויה.
               </p>
             </div>
           </div>
@@ -73,10 +73,10 @@ const coreSteps = [
       <div class="track-card" data-track-selector data-tracks={JSON.stringify(collaborationTracks)} data-email={siteConfig.email} data-rise>
         <div class="track-card-head">
           <div>
-            <span class="track-kicker">בחרו מסגרת עבודה להשוואה</span>
+            <span class="track-kicker">אפשרויות התקשרות להשוואה</span>
             <h3 data-track-title>{defaultTrack.label}</h3>
           </div>
-          <div class="track-tabs" role="tablist" aria-label="מסלולי שיתוף פעולה">
+          <div class="track-tabs" role="tablist" aria-label="אפשרויות עבודה משותפת">
             {collaborationTracks.map((track, idx) => (
               <button
                 type="button"

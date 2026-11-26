@@ -3,15 +3,15 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SEO from '../components/SEO.astro';
 import HeroDashboard from '../components/home/HeroDashboard.astro';
-import StatementSection from '../components/home/StatementSection.astro';
-import WaveSignalBanner from '../components/home/WaveSignalBanner.astro';
-import RetainerPackages from '../components/home/RetainerPackages.astro';
-import ServicesSection from '../components/home/ServicesSection.astro';
-import StickyShowcase from '../components/home/StickyShowcase.astro';
-import ProjectsGallery from '../components/home/ProjectsGallery.astro';
+import FeaturedProjects from '../components/home/FeaturedProjects.astro';
 import CapabilitiesArchitecture from '../components/home/CapabilitiesArchitecture.astro';
+import StickyShowcase from '../components/home/StickyShowcase.astro';
+import WaveSignalBanner from '../components/home/WaveSignalBanner.astro';
+import ProjectsGallery from '../components/home/ProjectsGallery.astro';
+import StatementSection from '../components/home/StatementSection.astro';
 import CollaborationBand from '../components/home/CollaborationBand.astro';
 import AboutDialCard from '../components/home/AboutDialCard.astro';
+import RetainerPackages from '../components/home/RetainerPackages.astro';
 import FaqSection from '../components/home/FaqSection.astro';
 import Contact from '../components/Contact.astro';
 import { siteConfig } from '../config';
@@ -23,15 +23,15 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
   <SEO slot="head" title={siteConfig.title} noSuffix />
 
   <HeroDashboard projects={projects} />
-  <StatementSection />
-  <WaveSignalBanner />
-  <RetainerPackages />
-  <ServicesSection />
-  <StickyShowcase />
-  <ProjectsGallery projects={projects} />
+  <FeaturedProjects projects={projects} />
   <CapabilitiesArchitecture projects={projects} />
+  <StickyShowcase />
+  <WaveSignalBanner />
+  <ProjectsGallery projects={projects} />
+  <StatementSection />
   <CollaborationBand />
   <AboutDialCard />
+  <RetainerPackages />
   <FaqSection />
 
   <div class="wrap bottom-section">

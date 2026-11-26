@@ -5,49 +5,49 @@ interface StatementWord {
 }
 
 const statementWords: StatementWord[] = [
-  { word: 'מערכות,' },
-  { word: 'אתרים' },
-  { word: 'ואוטומציות' },
+  { word: 'אינטגרציה' },
+  { word: 'טובה' },
   { word: 'לא' },
-  { word: 'נגמרים' },
-  { word: 'ביום' },
-  { word: 'ההשקה.' },
+  { word: 'נגמרת' },
+  { word: 'בחיבור' },
+  { word: 'הראשון.' },
   { word: 'ההבדל' },
   { word: 'האמיתי' },
   { word: 'הוא' },
-  { word: 'שקט', gold: true },
-  { word: 'תפעולי', gold: true },
+  { word: 'אמינות', gold: true },
+  { word: 'ובקרת', gold: true },
+  { word: 'איכות', gold: true },
   { word: '—' },
-  { word: 'ניטור' },
-  { word: 'תקלות,' },
-  { word: 'תחזוקה' },
-  { word: 'שוטפת' },
-  { word: 'ושיפור' },
-  { word: 'מתמיד' },
-  { word: 'תחת' },
-  { word: 'ריטיינר' },
-  { word: 'חודשי' },
-  { word: 'אחד.' },
+  { word: 'זיהוי' },
+  { word: 'תקלות' },
+  { word: 'שקטות,' },
+  { word: 'אימות' },
+  { word: 'מול' },
+  { word: 'מערכת' },
+  { word: 'היעד' },
+  { word: 'ותיעוד' },
+  { word: 'ברור' },
+  { word: 'לצוות.' },
 ];
 
 const pillars = [
   {
     figure: '3',
-    label: 'מסלולי ריטיינר שקופים לעסקים ולסוכנויות — עם חודש ראשון ללא התחייבות.',
+    label: 'תחומי ליבה: אוטומציות ואינטגרציות, כלים פנימיים ושילוב AI, וניטור ובקרת איכות.',
   },
   {
     figure: '6',
-    label: 'תחומי תפעול תחת קורת גג אחת: אוטומציות ו־CRM, אתרים, איקומרס, SEO, סושיאל ו־AI.',
+    label: 'מערכות מתועדות בתיק העבודות — עם ארכיטקטורה, בדיקות וצילומי מסך מהרצה מקומית.',
   },
   {
-    figure: 'WL',
-    label: 'זרוע ביצוע שוטפת לסוכנויות ב־White-label או ישירות לעסקים וחנויות אונליין.',
+    figure: '20',
+    label: 'כלים וטכנולוגיות בחיבור יומיומי: CRM, Make/n8n, ענן, איקומרס, APIs ו־MCP.',
   },
 ] as const;
 ---
 <section id="approach" class="page-sec statement-sec" aria-labelledby="statement-label">
   <div class="wrap split-layout">
-    <div id="statement-label" class="sec-label">הגישה</div>
+    <div id="statement-label" class="sec-label">הגישה ההנדסית</div>
     <div class="statement-body">
       <p class="statement-text" data-ink-statement>
         {statementWords.map((item, idx) => (

@@ -1,7 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Glyph from '../Glyph.astro';
-import { capabilities } from '../../data/portfolio';
+import ToolLogo from '../ToolLogo.astro';
+import { coreSpecialties, toolCategories } from '../../data/portfolio';
 
 interface Props {
   projects: CollectionEntry<'projects'>[];
@@ -23,33 +24,93 @@ const initialProject = archData[0];
 ---
 <section id="capabilities" class="page-sec cov-sec" aria-labelledby="cap-title">
   <div class="wrap">
-    <div class="sec-label">יכולות וארכיטקטורה</div>
+    <div class="sec-label">יכולות ותחומי התמחות</div>
     <h2 id="cap-title" class="sec-h2 cov-title" data-rise>
-      מה אפשר לבנות יחד — <em>ממשימה נקודתית ועד מערכת מלאה</em>
+      שלושה תחומי ליבה — <em>מחיבור מערכות ועד ניטור ובקרה</em>
     </h2>
     <p class="sec-sub" data-rise>
-      משימה ממוקדת או מערכת שמחברת בין כמה צוותים, מקורות מידע וכלים חיצוניים.
+      בנייה של אוטומציות וכלים פנימיים מאפס, לצד כניסה למערכות קיימות לצורך איתור תקלות, ייצוב והוספת בקרות איכות.
     </p>
 
-    <div class="cap-grid">
-      {capabilities.map((cap) => (
-        <article class="cap-item" data-rise>
-          <span class="cap-ic">
-            <Glyph name={cap.icon} size={20} stroke={1.55} />
-          </span>
+    <div class="cap-grid cap-grid-3">
+      {coreSpecialties.map((cap) => (
+        <article id={`specialty-${cap.id}`} class="cap-item specialty-card" data-rise>
+          <div class="service-card-top">
+            <span class="cap-ic">
+              <Glyph name={cap.icon} size={20} stroke={1.65} />
+            </span>
+            <span class="service-badge" dir="ltr">{cap.kicker}</span>
+          </div>
           <h3>{cap.title}</h3>
-          <p class="cap-label" dir="ltr">{cap.label}</p>
-          <ul class="cap-bullets">
-            {cap.items.map((bullet) => (
-              <li>{bullet}</li>
+          <p class="specialty-desc">{cap.description}</p>
+          <ul class="service-points">
+            {cap.points.map((bullet) => (
+              <li>
+                <Glyph name="check" size={14} stroke={2.2} />
+                <span>{bullet}</span>
+              </li>
             ))}
           </ul>
           <a class="cap-example-link" href={`/projects/${cap.relatedSlug}/`}>
-            <span>דוגמה בפועל</span>
+            <span>{cap.relatedLabel}</span>
             <Glyph name="arrow-left" size={14} />
           </a>
         </article>
       ))}
+    </div>
+
+    <!-- Compact Tools & Technologies Section with Brand Logos -->
+    <div id="tools" class="tools-showcase" aria-labelledby="tools-title" data-rise>
+      <div class="tools-head">
+        <div>
+          <div class="sec-label">אקוסיסטם וטכנולוגיות</div>
+          <h3 id="tools-title" class="tools-title">כלים וטכנולוגיות שאני עובד איתם</h3>
+          <p class="tools-sub">
+            כלים שמסומנים בנקודת זהב מקושרים ישירות למקרה בוחן מתועד באתר שבו הם בשימוש בפועל.
+          </p>
+        </div>
+        <span class="tools-legend">
+          <i class="tool-linked-dot" aria-hidden="true"></i>
+          <span>מקושר למקרה בוחן באתר</span>
+        </span>
+      </div>
+
+      <div class="tools-categories-grid">
+        {toolCategories.map((cat) => (
+          <div class="tool-cat-card">
+            <h4 class="tool-cat-title">{cat.title}</h4>
+            <ul class="tool-chips-list" aria-label={cat.title}>
+              {cat.tools.map((tool) => (
+                <li>
+                  {tool.projectSlug ? (
+                    <a
+                      href={`/projects/${tool.projectSlug}/`}
+                      class="tool-chip tool-chip-linked"
+                      title={`לצפייה במקרה הבוחן: ${tool.projectTitle}`}
+                    >
+                      <span class="tool-chip-logo">
+                        <ToolLogo name={tool.id} size={18} />
+                      </span>
+                      <span class="tool-chip-name" dir="ltr">{tool.name}</span>
+                      <span class="tool-chip-badge" aria-hidden="true">
+                        <i class="tool-linked-dot"></i>
+                        <Glyph name="arrow-left" size={11} />
+                      </span>
+                    </a>
+                  ) : (
+                    <span class="tool-chip">
+                      <span class="tool-chip-logo">
+                        <ToolLogo name={tool.id} size={18} />
+                      </span>
+                      <span class="tool-chip-name" dir="ltr">{tool.name}</span>
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
 
     <div id="architecture" class="arch-workbench" data-arch-explorer data-arch-projects={JSON.stringify(archData)} data-rise>
